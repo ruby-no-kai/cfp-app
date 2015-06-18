@@ -27,7 +27,7 @@ class Staff::SpeakersController < Staff::ApplicationController
   end
 
   def show
-    @speaker = current_event.speakers.find(params[:id])
+    @speaker = SpeakerDecorator.decorate(current_event.speakers.find(params[:id]))
   end
 
   def edit
