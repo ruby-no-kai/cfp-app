@@ -10,7 +10,7 @@ class SpeakerDecorator < Draper::Decorator
   def link_to_github
     if user.provider == 'github'
       uname = github_uid_to_uname user.uid
-      h.link_to "@#{uname}", "https://github.com/#{uname}"
+      h.link_to "@#{uname}", "https://github.com/#{uname}", target: '_blank'
     else
       'none'
     end
@@ -26,7 +26,7 @@ class SpeakerDecorator < Draper::Decorator
   def link_to_twitter
     if user.provider == 'twitter'
       uname = twitter_uid_to_uname user.uid
-      h.link_to "@#{uname}", "https://twitter.com/#{uname}"
+      h.link_to "@#{uname}", "https://twitter.com/#{uname}", target: '_blank'
     else
       'none'
     end
