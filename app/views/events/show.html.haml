@@ -23,6 +23,12 @@
             = time_ago_in_words(event.closes_at)
             left
           to submit your proposal!
+        %h2.h4.strong About a ticket coupon
+        %p
+          All people submitting a proposal can get a ticket coupon! Please wait to purchase the ticket until your proposal is adopted or not. If proposal is adopted, you can get an 100% discount coupon. Even not, you can get coupon at SuperEarlyBird price. Please purchase the ticket by using a coupon from
+          = link_to "Doorkeeper's event page", 'https://rubykaigi.doorkeeper.jp/events/upcoming'
+          \.
+
     - if event.proposals.count > 5
       .stats
         %h2 CFP Stats
