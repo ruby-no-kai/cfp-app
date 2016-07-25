@@ -101,7 +101,7 @@ class SessionDecorator < Draper::Decorator
   end
 
   def conference_wide_title
-    title + ": " + room_name
+    title + ": " + (room_name.presence || '')
   end
 
   def cell_data_attr
