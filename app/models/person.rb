@@ -145,11 +145,11 @@ class Person < ActiveRecord::Base
   end
 
   def twitter_account
-    services.detect {|s| s.provider == 'twitter'}&.account_name
+    @_twitter_account ||= services.detect {|s| s.provider == 'twitter'}&.account_name
   end
 
   def github_account
-    services.detect {|s| s.provider == 'github'}&.account_name
+    @_github_account ||= services.detect {|s| s.provider == 'github'}&.account_name
   end
 
   def social_account
