@@ -143,6 +143,18 @@ class Person < ActiveRecord::Base
   def role_names
     self.participants.collect {|p| p.role}.uniq.join(", ")
   end
+
+  def twitter_account
+    services.detect {|s| s.provider == 'twitter'}&.account_name
+  end
+
+  def github_account
+    services.detect {|s| s.provider == 'github'}&.account_name
+  end
+
+  def social_account
+    twitter_account || github_account
+  end
 end
 
 # == Schema Information
