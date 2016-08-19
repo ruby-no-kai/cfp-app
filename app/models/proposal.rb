@@ -175,15 +175,15 @@ class Proposal < ApplicationRecord
   end
 
   def speaker_can_edit?(user)
-    has_speaker?(user) && !(withdrawn? || accepted? || confirmed?)
+    has_speaker?(user) && !(withdrawn? || accepted?)
   end
 
   def speaker_can_withdraw?(user)
-    speaker_can_edit?(user) && has_reviewer_activity?
+    speaker_can_edit?(user) && !confirmed? && has_reviewer_activity?
   end
 
   def speaker_can_delete?(user)
-    speaker_can_edit?(user) && !has_reviewer_activity?
+    speaker_can_edit?(user) && !confirmed? && !has_reviewer_activity?
   end
 
   def to_param
