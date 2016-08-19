@@ -11,7 +11,7 @@
       - if proposal.has_speaker?(current_user)
         .toolbox.pull-right
           .clearfix
-            - unless proposal.withdrawn? || proposal.accepted? || proposal.confirmed?
+            - unless proposal.withdrawn? || proposal.accepted?
               = link_to edit_proposal_path(slug: event.slug, uuid: proposal), class: 'btn btn-primary' do
                 %span.glyphicon.glyphicon-edit
                 Edit
