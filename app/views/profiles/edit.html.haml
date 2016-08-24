@@ -12,7 +12,10 @@
     %fieldset.col-md-4
       %h2 Identity Services
       %p
-        Email is only used for notifications on proposal feedback and acceptance into the program.
+        Email is only used for
+        %ul
+          %li * notifications on proposal feedback and acceptance into the program
+          %li * fetching your profile picture for the website from gravatar.com
       .form-group
         = f.label :email
         = f.email_field :email, class: 'form-control', placeholder: 'Your email address'
