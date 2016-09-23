@@ -1,16 +1,19 @@
 <% unless @event.accept.blank? %>
   <%= Organizer::ProposalMailerTemplate.new(@event.accept, @event, @proposal).render %>
- <% else %>
+<% else %>
     Congratulations! We'd love to include your talk, <%= @proposal.title %>, at <%= @event.name %>.
 
-    TO CONFIRM that you're still willing and able to present this talk, please visit the <%= @proposal.confirm_link %> .
+    TO CONFIRM that you're still willing and able to present the above talk, please do two things:
 
-    If you already purchased a ticket for RubyKaigi, please email us at 2017@rubykaigi.org and we will happily refund your ticket.
+    1. Click <%= @proposal.confirm_link %> and click the 'Confirm' button.
+
+    2. Once you have confirmed, please use this link <%= raise 'fill think link' %> to book your complimentary Speaker's pass. If you already have purchased a ticket to RubyKaigi, you should still book your Speaker ticket, and then email 2017@rubykaigi.org to obtain a refund for your paid ticket.
+
+    Please note: if your accepted talk has more than one speaker, each speaker needs his or her own complimentary speaker's pass.
 
     TO DECLINE (if you're no longer able to give this talk), please visit the <%= @proposal.confirm_link %>, and click the 'Withdraw Proposal' button.
 
-    In the meantime, let us know if you have any questions. We're looking forward to seeing you there!
+    In the meantime, be sure to let us know if you have any questions. We're looking forward to seeing you there!
 
-    The <%= @event.name %> Organizers
-
+    The <%= @event.name %> Committee
 <% end %>

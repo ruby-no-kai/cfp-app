@@ -2,13 +2,13 @@
   <%= Organizer::ProposalMailerTemplate.new(@event.reject, @event,
       @proposal, [ :proposal_title ]).render %>
 <% else %>
-    Thank you for your proposal to <%= @event.name %>. Our program committee received many great talk submissions this year, and that's allowed us to put together an exciting program.
+    Thank you for submitting your proposal to <%= @event.name %>. Our Program Committee received a large number of high-quality talk submissions this year. On one hand, that has allowed us to put together a very exciting program.
 
-    As a result of the number of talks submitted, however, we've had to turn down a lot of excellent proposals. I'm sorry to say that we were not able to accept your submission titled, <%= @proposal.title %>, this year. This is always the toughest part knowing that we simply can't fit all the good talks in. We hope that you'll still be able to attend the conference.
+    However, that also means that -- given the sheer number of talks submitted -- we have to decline a lot of excellent proposals. Sadly, that includes your submission -- <%= @proposal.title %>. Knowing that we simply can't fit all the good talks in is always the toughest part of the program selection process.
 
-    If you haven't already purchased a ticket for RubyKaigi, you will be able to get one at the "Super Early Bird" price even if the tickets are sold out. In that case, please email us at 2017@rubykaigi.org for the discount.
+    Our sincere hope is that you will still be able to attend the conference. To that point, we ensure you the chance to get a single RubyKaigi ticket at the "Super Early Bird" price, even if the general pool of tickets sells out. In that case, please email us at 2017@rubykaigi.org for the discount.
 
-    Thanks again for your submission as we really appreciate your willingness to share with the community.
+    Thank you again for your submission. We are truly appreciative of your willingness to share your ideas and efforts with our community.
 
     The <%= @event.name %> Organizers
 
