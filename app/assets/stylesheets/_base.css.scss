@@ -8,7 +8,9 @@ body {
 .alert {
   margin-top: 20px;
 }
-
+.alert-dismissable .close {
+    margin-bottom: -10px;
+}
 .alert-viewer-mode {
   padding: 10px 0;
   margin-bottom: 20px;
@@ -229,14 +231,13 @@ h3.tags {
   display: inline-block;
 }
 
-// 2016.04.18
 .btn-success {
   color: white;
-  background-color: #c22700;
-  border-color: #c22700;
+  background-color: $color-pink;
+  border-color: $color-pink;
 }
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active {
   color: white;
-  background-color: #af2300;
-  border-color: #af2300;
+  background-color: darken($color-pink, 10%);
+  border-color: darken($color-pink, 10%);
 }
