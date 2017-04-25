@@ -8,7 +8,9 @@ body {
 .alert {
   margin-top: 20px;
 }
-
+.alert-dismissable .close {
+    margin-bottom: -10px;
+}
 .alert-viewer-mode {
   padding: 10px 0;
   margin-bottom: 20px;
