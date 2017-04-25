@@ -7,7 +7,8 @@
 	background-size: 300px 300px;
 	border-color: #fff;
 }
-.navbar-inverse .navbar-nav > li > a {
+.navbar-inverse .navbar-nav > li > a,
+.navbar-inverse .navbar-nav > li > a:focus {
 	font-family: $font-family;
   color: $color-black;
 	&:hover {
