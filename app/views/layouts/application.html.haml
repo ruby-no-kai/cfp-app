@@ -28,7 +28,8 @@
           - if event && event.slug
             = link_to event.name, event_path(slug: event.slug), class: 'navbar-brand'
           - else
-            = link_to image_tag('rubykaigi2016_logo.png', class: 'logo-rubykaigi2016'), events_path, class: 'navbar-brand'
+            = link_to events_path, class: 'navbar-brand' do
+              = image_tag('rubykaigi2017_logo.png', class: 'logo-rubykaigi2017')
 
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
