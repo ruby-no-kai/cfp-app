@@ -61,15 +61,15 @@ class ProposalDecorator < ApplicationDecorator
     speaker ? speaker.bio : ''
   end
 
-  def pitch
+  def compiled_pitch
     h.markdown(object.pitch)
   end
 
-  def details
+  def compiled_details
     h.markdown(object.details)
   end
 
-  def abstract
+  def compiled_abstract
     h.markdown(object.abstract)
   end
 

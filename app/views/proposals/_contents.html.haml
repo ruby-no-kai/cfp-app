@@ -15,15 +15,15 @@
 
 %h3 Abstract
 .markdown{ data: { 'field-id' => 'proposal_abstract' } }
-  = proposal.abstract
+  = proposal.compiled_abstract
 
 %h3 Details
 .markdown{ data: { 'field-id' => 'proposal_details' } }
-  = proposal.details
+  = proposal.compiled_details
 
 %h3 Pitch
 .markdown{ data: { 'field-id' => 'proposal_pitch' } }
-  =proposal.pitch
+  =proposal.compiled_pitch
 
   - if proposal.custom_fields.any?
     - proposal.proposal_data[:custom_fields].select do |key,value|
