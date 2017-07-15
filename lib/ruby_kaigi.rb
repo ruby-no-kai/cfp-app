@@ -1,0 +1,69 @@
+module RubyKaigi
+  module CfpApp
+    def self.speakers(event)
+      keynotes, speakers = {}, {}
+      Speaker.joins(:proposal).includes(:user, program_session: [:session_format, :time_slot]).merge(event.proposals.accepted.confirmed).order('time_slots.conference_day, time_slots.start_time').decorate.each do |sp|
+        user = sp.user
+        id = sp.social_account
+        bio = if sp.bio.present? && (sp.bio != 'N/A')
+          sp.bio
+        else
+          user.bio || ''
+        end.gsub("\r\n", "\n").strip
+        h = {'id' => id, 'name' => user.name, 'bio' => bio, 'github_id' => sp.github_account, 'twitter_id' => sp.twitter_account, 'gravatar_hash' => Digest::MD5.hexdigest(user.email)}
+        if sp.program_session.session_format.name == 'Keynote'
+          keynotes[id] = h
+        else
+          speakers[id] = h
+        end
+      end
+
+      result = {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by {|p| p.last['name'].downcase }.to_h }
+      result.delete 'keynotes' if result['keynotes'].empty?
+      result
+    end
+
+    def self.presentations(event)
+      time_slots = event.time_slots.joins([:room, :program_session]).includes(:room, program_session: [:proposal, {speakers: :user}]).order('time_slots.conference_day, time_slots.start_time, rooms.grid_position')
+      time_slots.to_h do |ts|
+        ps = ts.program_session
+        speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
+        lang = ps.proposal.spoken_language
+
+        type = ps.session_format.name.sub('Regular Session', 'Presentation').downcase
+        [speakers.first, {title: ps.title.strip, type: type, language: lang, description: ps.abstract.gsub("\r\n", "\n").chomp, speakers: speakers.map {|sp| {id: sp} }}.deep_stringify_keys]
+      end
+    end
+
+    def self.schedule(event)
+      first_date = event.start_date.to_date
+
+      time_slots = event.time_slots.includes(:room, program_session: {speakers: :user})
+
+      time_slots.group_by(&:conference_day).sort_by {|day, _| day }.to_h do |day, time_slots_per_day|
+        events = time_slots_per_day.group_by {|s| [s.start_time, s.end_time] }.sort_by {|(start_time, end_time), _| [start_time, end_time] }.map do |(start_time, end_time), time_slots|
+          if time_slots.one? && time_slots.first['presenter'].in?(%w(break lt))
+            {type: time_slots.first['presenter'], begin: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'), name: time_slots.first.title}
+          else
+            program_sessions = time_slots.select(&:program_session).sort_by {|s| s.room.grid_position }.map(&:program_session)
+            type = program_sessions.one? && program_sessions.first.session_format.name == 'Keynote' ? 'keynote' : 'talk'
+            talks = program_sessions.to_h {|ps| [ps.time_slot.room.name, ps.speakers.first.decorate.social_account] }
+            {type: type, begin: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'), talks: talks}
+          end
+        end
+        [(day - 1).days.since(first_date).strftime('%b%d').downcase, {events: events}.deep_stringify_keys]
+      end
+    end
+
+    def self.spoken_language(lang = 'ja')
+      case lang&.downcase || 'ja'
+      when 'japanese (if allowed, i can record the talk in both japanese and english)', 'en & ja'
+        'EN & JA'
+      when 'ja', 'jp', 'japanese', '日本語', 'maybe japanese (not sure until fix the contents)'
+        'JA'
+      else
+        'EN'
+      end
+    end
+  end
+end
