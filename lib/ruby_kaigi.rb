@@ -49,15 +49,32 @@ module RubyKaigi
       File.write "#{@path}/data/year_2017/speakers.yml", content
     end
 
-    def pr
+    def sponsors
+      File.read "#{@path}/data/year_2017/sponsors.yml"
+    end
+
+    def sponsors=(content)
+      File.write "#{@path}/data/year_2017/sponsors.yml", content
+    end
+
+    def pr(title: 'From cfp-app')
       Dir.chdir @path do
         branch_name = "from-cfpapp-#{Time.now.strftime('%Y%m%d%H%M%S')}"
         `git checkout -b #{branch_name}`
         `git config user.name "RubyKaigi Bot" && git config user.email "amatsuda@rubykaigi.org"`
-        `git commit -am 'From cfp-app' && git push -u rubykaigi-bot HEAD`
+        `git commit -am '#{title}' && git push -u rubykaigi-bot HEAD`
         uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi2017/pulls'
-        Net::HTTP.post uri, {'title' => 'From cfp-app', 'head' => "rubykaigi-bot:#{branch_name}", 'base' => 'master'}.to_json, {'Authorization' => "token #{ENV['GITHUB_TOKEN']}"}
+        Net::HTTP.post uri, {'title' => title, 'head' => "rubykaigi-bot:#{branch_name}", 'base' => 'master'}.to_json, {'Authorization' => "token #{ENV['GITHUB_TOKEN']}"}
       end
+    end
+  end
+
+  module Gist
+    def self.sponsors_yml
+      uri = URI 'https://api.github.com/gists/d6f1dd44017aac2ec4031aa9178f99e8'
+      uri.query = URI.encode_www_form 'access_token': ENV['GIST_TOKEN']
+      res = Net::HTTP.get(uri)
+      JSON.parse(res)['files']['rubykaigi2017_sponsors.yml']['content']
     end
   end
 
