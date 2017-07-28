@@ -31,7 +31,7 @@ module RubyKaigi
         Dir.chdir 'rubykaigi2017' do
           `git checkout master`
           `git remote add rubykaigi-bot https://#{ENV['GITHUB_TOKEN']}@github.com/rubykaigi-bot/rubykaigi2017.git`
-          `git pull`
+          `git pull --all`
         end
       end
       new '/tmp/rubykaigi2017'
@@ -45,6 +45,13 @@ module RubyKaigi
       File.read "#{@path}/data/year_2017/speakers.yml"
     end
 
+    def pull_requested_speakers
+      `git checkout speakers-from-cfpapp`
+      File.read "#{@path}/data/year_2017/speakers.yml"
+    ensure
+      `git checkout master`
+    end
+
     def speakers=(content)
       File.write "#{@path}/data/year_2017/speakers.yml", content
     end
@@ -53,18 +60,24 @@ module RubyKaigi
       File.read "#{@path}/data/year_2017/sponsors.yml"
     end
 
+    def pull_requested_sponsors
+      `git checkout sponsors-from-spreadsheet`
+      File.read "#{@path}/data/year_2017/sponsors.yml"
+    ensure
+      `git checkout master`
+    end
+
     def sponsors=(content)
       File.write "#{@path}/data/year_2017/sponsors.yml", content
     end
 
-    def pr(title: 'From cfp-app')
+    def pr(title: 'From cfp-app', branch: "from-cfpapp-#{Time.now.strftime('%Y%m%d%H%M%S')}")
       Dir.chdir @path do
-        branch_name = "from-cfpapp-#{Time.now.strftime('%Y%m%d%H%M%S')}"
-        `git checkout -b #{branch_name}`
+        `git checkout -b #{branch}`
         `git config user.name "RubyKaigi Bot" && git config user.email "amatsuda@rubykaigi.org"`
         `git commit -am '#{title}' && git push -u rubykaigi-bot HEAD`
         uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi2017/pulls'
-        Net::HTTP.post uri, {'title' => title, 'head' => "rubykaigi-bot:#{branch_name}", 'base' => 'master'}.to_json, {'Authorization' => "token #{ENV['GITHUB_TOKEN']}"}
+        Net::HTTP.post uri, {'title' => title, 'head' => "rubykaigi-bot:#{branch}", 'base' => 'master'}.to_json, {'Authorization' => "token #{ENV['GITHUB_TOKEN']}"}
       end
     end
   end
