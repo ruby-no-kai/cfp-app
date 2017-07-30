@@ -65,6 +65,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.time_zone = ENV.fetch('TIMEZONE') { 'Pacific Time (US & Canada)' }
+  config.time_zone = ENV.fetch('TIMEZONE') { 'Tokyo' }
   config.action_cable.url = 'ws://localhost:3000/cable'
 end
