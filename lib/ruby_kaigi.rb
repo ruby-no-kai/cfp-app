@@ -35,6 +35,28 @@ module RubyKaigi
         h[speakers.first] = {'title' => p.title, 'type' => type, 'language' => lang, 'description' => p.abstract.gsub("\r\n", "\n").chomp, 'speakers' => speakers.map {|sp| {'id' => sp}}}
       end
     end
+
+    def self.schedule(event)
+      first_date = event.start_date.to_date
+
+      result = event.sessions.includes(proposal: {speakers: {person: :services}}).group_by(&:conference_day).sort_by {|day, _| day}.each_with_object({}) do |(day, sessions), schedule|
+        events = sessions.group_by {|s| [s.start_time, s.end_time]}.sort_by {|(start_time, end_time), _| [start_time, end_time]}.map do |(start_time, end_time), sessions_per_time|
+          event = {'type' => nil, 'begin' => start_time.strftime('%H:%M'), 'end' => end_time.strftime('%H:%M')}
+          talks = sessions_per_time.sort_by(&:room_id).each_with_object({}) do |session, h|
+            h[session.room.room_number] = session.proposal.speakers.first.person.social_account if session.proposal
+          end
+          if talks.any?
+            event['type'] = sessions_per_time.any? {|s| s.id.in?(KEYNOTE_SESSIONS)} ? 'keynote' : 'talk'
+            event['talks'] = talks
+          else
+            event['name'] = sessions_per_time.first.title
+            event['type'] = 'break'
+          end
+          event
+        end
+        schedule[(day - 1).days.since(first_date).strftime('%b%d').downcase] = {'events' => events}
+      end
+    end
   end
 
   class RKO
