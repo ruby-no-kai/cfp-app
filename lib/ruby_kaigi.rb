@@ -1,6 +1,9 @@
 module RubyKaigi
   # 2017
   KEYNOTES = %w(yukihiro_matz n0kada vnmakarov)
+  KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138]  # matz, justin, nalsh, nobu, matz, vnmakarov
+
+  DISCUSSION_SESSIONS = [127, 172].freeze  # committers
 
   module CfpApp
     def self.speakers(event)
@@ -21,6 +24,16 @@ module RubyKaigi
       keynotes, speakers = people.partition {|p| KEYNOTES.include? p.first}
 
       {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by {|p| p.first.downcase}.to_h}
+    end
+
+    def self.presentations(event)
+      proposals = event.proposals.joins(:session).includes([{speakers: {person: :services}}, :session]).accepted.confirmed.order('sessions.conference_day, sessions.start_time, sessions.room_id')
+      presentations = proposals.each_with_object({}) do |p, h|
+        speakers = p.speakers.map {|sp| sp.person.social_account }
+        lang = p.custom_fields['spoken language in your talk'].downcase.in?(['ja', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)']) ? 'JA' : 'EN'
+        type = p.session.id.in?(KEYNOTE_SESSIONS) ? 'keynote' : (p.session.id.in?(DISCUSSION_SESSIONS) ? 'discussion' : 'presentation')
+        h[speakers.first] = {'title' => p.title, 'type' => type, 'language' => lang, 'description' => p.abstract.gsub("\r\n", "\n").chomp, 'speakers' => speakers.map {|sp| {'id' => sp}}}
+      end
     end
   end
 
