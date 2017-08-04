@@ -76,34 +76,23 @@ module RubyKaigi
       @path = path
     end
 
-    def speakers
-      File.read "#{@path}/data/year_2017/speakers.yml"
-    end
+    %w(speakers sponsors).each do |name|
+      define_method name do
+        File.read "#{@path}/data/year_2017/#{name}.yml"
+      end
 
-    def pull_requested_speakers
-      `git checkout speakers-from-cfpapp`
-      File.read "#{@path}/data/year_2017/speakers.yml"
-    ensure
-      `git checkout master`
-    end
+      define_method "#{name}=" do |content|
+        File.write "#{@path}/data/year_2017/#{name}.yml", content
+      end
 
-    def speakers=(content)
-      File.write "#{@path}/data/year_2017/speakers.yml", content
-    end
-
-    def sponsors
-      File.read "#{@path}/data/year_2017/sponsors.yml"
-    end
-
-    def pull_requested_sponsors
-      `git checkout sponsors-from-spreadsheet`
-      File.read "#{@path}/data/year_2017/sponsors.yml"
-    ensure
-      `git checkout master`
-    end
-
-    def sponsors=(content)
-      File.write "#{@path}/data/year_2017/sponsors.yml", content
+      define_method "pull_requested_#{name}" do
+        begin
+          `git checkout #{name}-from-cfpapp`
+          File.read "#{@path}/data/year_2017/#{name}.yml"
+        ensure
+          `git checkout master`
+        end
+      end
     end
 
     def pr(title: 'From cfp-app', branch: "from-cfpapp-#{Time.now.strftime('%Y%m%d%H%M%S')}")
