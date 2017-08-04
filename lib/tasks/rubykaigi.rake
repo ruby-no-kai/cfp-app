@@ -16,6 +16,25 @@ namespace :rubykaigi do
       end
     end
 
+    desc 'Generate presentations.yml and schedule.yml from cfp-app and send a PR to the RKO repo'
+    task :schedule, [:event_slug] => :environment do |t, args|
+      require 'ruby_kaigi'
+
+      event = Event.find_by! slug: args[:event_slug]
+      repo = RubyKaigi::RKO.clone
+      new_schedule_yaml = RubyKaigi::CfpApp.schedule(event).to_yaml
+      old_schedule_yaml = repo.pull_requested_schedule || repo.schedule
+      new_presentations_yaml = RubyKaigi::CfpApp.presentations(event).to_yaml
+      old_presentations_yaml = repo.pull_requested_presentations || repo.presentations
+
+      if (new_schedule_yaml != old_schedule_yaml) || (new_presentations_yaml != old_presentations_yaml)
+        repo.schedule = new_schedule_yaml
+        repo.presentations = new_presentations_yaml
+        p res = repo.pr(title: 'Updates on schedule.yml/presentations.yml from cfp-app', branch: 'schedule-from-cfpapp')
+        p res.body unless res.code.to_s == '201'
+      end
+    end
+
     desc 'Generate sponsors.yml from gist and send a PR to the RKO repo'
     task sponsors: :environment do |t, args|
       require 'ruby_kaigi'
