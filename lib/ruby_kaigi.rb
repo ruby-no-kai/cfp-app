@@ -76,7 +76,7 @@ module RubyKaigi
       @path = path
     end
 
-    %w(speakers sponsors).each do |name|
+    %w(speakers sponsors schedule presentations).each do |name|
       define_method name do
         File.read "#{@path}/data/year_2017/#{name}.yml"
       end
