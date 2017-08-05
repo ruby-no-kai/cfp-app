@@ -3,7 +3,8 @@ module RubyKaigi
   KEYNOTES = %w(yukihiro_matz n0kada vnmakarov)
   KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138]  # matz, justin, nalsh, nobu, matz, vnmakarov
 
-  DISCUSSION_SESSIONS = [127, 172].freeze  # committers
+  DISCUSSION_SESSIONS = [127, 172].freeze  # committers, committers
+  LT_SESSIONS = [159].freeze  # LT
 
   module CfpApp
     def self.speakers(event)
@@ -48,6 +49,9 @@ module RubyKaigi
           if talks.any?
             event['type'] = sessions_per_time.any? {|s| s.id.in?(KEYNOTE_SESSIONS)} ? 'keynote' : 'talk'
             event['talks'] = talks
+          elsif sessions_per_time.any? {|s| s.id.in?(LT_SESSIONS)}
+            event['name'] = sessions_per_time.first.title
+            event['type'] = 'lt'
           else
             event['name'] = sessions_per_time.first.title
             event['type'] = 'break'
