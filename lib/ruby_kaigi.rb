@@ -30,7 +30,7 @@ module RubyKaigi
     def self.presentations(event)
       proposals = event.proposals.joins(:session).includes([{speakers: {person: :services}}, :session]).accepted.confirmed.order('sessions.conference_day, sessions.start_time, sessions.room_id')
       presentations = proposals.each_with_object({}) do |p, h|
-        speakers = p.speakers.map {|sp| sp.person.social_account }
+        speakers = p.speakers.sort_by(&:id).map {|sp| sp.person.social_account }
         lang = p.custom_fields['spoken language in your talk'].downcase.in?(['ja', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)']) ? 'JA' : 'EN'
         type = p.session.id.in?(KEYNOTE_SESSIONS) ? 'keynote' : (p.session.id.in?(DISCUSSION_SESSIONS) ? 'discussion' : 'presentation')
         h[speakers.first] = {'title' => p.title, 'type' => type, 'language' => lang, 'description' => p.abstract.gsub("\r\n", "\n").chomp, 'speakers' => speakers.map {|sp| {'id' => sp}}}
