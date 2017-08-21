@@ -23,7 +23,9 @@ module RubyKaigi
       end
       keynotes, speakers = people.partition {|p| KEYNOTES.include? p.first}
 
-      {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by {|p| p.first.downcase}.to_h}
+      speakers = {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by {|p| p.first.downcase}.to_h}
+      speakers.delete 'keynotes' if speakers['keynotes'].empty?
+      speakers
     end
 
     def self.presentations(event)
