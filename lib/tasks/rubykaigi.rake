@@ -9,10 +9,13 @@ namespace :rubykaigi do
       repo = RubyKaigi::RKO.clone
       old_yaml = repo.pull_requested_speakers || repo.speakers
 
-      if new_yaml != old_yaml
+      if new_yaml == old_yaml
+        Rails.logger.info 'No change.'
+      else
         repo.speakers = new_yaml
         p res = repo.pr(title: 'Updates on speakers.yml from cfp-app', branch: 'speakers-from-cfpapp')
         p res.body unless res.code.to_s == '201'
+        Rails.logger.info 'PRed.'
       end
     end
 
@@ -25,10 +28,13 @@ namespace :rubykaigi do
       repo = RubyKaigi::RKO.clone
       old_yaml = repo.pull_requested_lt_speakers || repo.lt_speakers
 
-      if new_yaml != old_yaml
+      if new_yaml == old_yaml
+        Rails.logger.info 'No change.'
+      else
         repo.lt_speakers = new_yaml
         p res = repo.pr(title: 'Updates on lt_speakers.yml from cfp-app', branch: 'lt_speakers-from-cfpapp')
         p res.body unless res.code.to_s == '201'
+        Rails.logger.info 'PRed.'
       end
     end
 
@@ -43,11 +49,14 @@ namespace :rubykaigi do
       new_presentations_yaml = RubyKaigi::CfpApp.presentations(event).to_yaml
       old_presentations_yaml = repo.pull_requested_presentations || repo.presentations
 
-      if (new_schedule_yaml != old_schedule_yaml) || (new_presentations_yaml != old_presentations_yaml)
+      if (new_schedule_yaml == old_schedule_yaml) || (new_presentations_yaml == old_presentations_yaml)
+        Rails.logger.info 'No change.'
+      else
         repo.schedule = new_schedule_yaml
         repo.presentations = new_presentations_yaml
         p res = repo.pr(title: 'Updates on schedule.yml/presentations.yml from cfp-app', branch: 'schedule-from-cfpapp')
         p res.body unless res.code.to_s == '201'
+        Rails.logger.info 'PRed.'
       end
     end
 
@@ -59,10 +68,13 @@ namespace :rubykaigi do
       repo = RubyKaigi::RKO.clone
       old_yaml = repo.pull_requested_sponsors || repo.sponsors
 
-      if new_yaml != old_yaml
+      if new_yaml == old_yaml
+        Rails.logger.info 'No change.'
+      else
         repo.sponsors = new_yaml
         p res = repo.pr(title: 'Updates on sponsors.yml from the spreadsheet', branch: 'sponsors-from-spreadsheet')
         p res.body unless res.code.to_s == '201'
+        Rails.logger.info 'PRed.'
       end
     end
   end
