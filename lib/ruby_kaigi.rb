@@ -8,8 +8,7 @@ module RubyKaigi
 
   module CfpApp
     def self.speakers(event)
-      # people = Person.includes(:services).where(id: event.proposals.select('people.id').joins(speakers: :person).accepted.confirmed).each_with_object({}) do |p, hash|
-      people = Speaker.includes(person: :services).where(id: event.proposals.select('speakers.id').joins(:speakers).accepted.confirmed).each_with_object({}) do |sp, hash|
+      people = Speaker.joins(:proposal).includes(person: :services).merge(event.proposals.accepted.confirmed).each_with_object({}) do |sp, hash|
         person = sp.person
         tw = person.services.detect {|s| s.provider == 'twitter'}&.account_name
         gh = person.services.detect {|s| s.provider == 'github'}&.account_name
