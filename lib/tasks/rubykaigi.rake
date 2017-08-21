@@ -16,6 +16,22 @@ namespace :rubykaigi do
       end
     end
 
+    desc 'Generate lt_speakers.yml from cfp-app and send a PR to the RKO repo'
+    task :lt_speakers, [:event_slug] => :environment do |t, args|
+      require 'ruby_kaigi'
+
+      event = Event.find_by! slug: args[:event_slug]
+      new_yaml = RubyKaigi::CfpApp.speakers(event).to_yaml
+      repo = RubyKaigi::RKO.clone
+      old_yaml = repo.pull_requested_lt_speakers || repo.lt_speakers
+
+      if new_yaml != old_yaml
+        repo.lt_speakers = new_yaml
+        p res = repo.pr(title: 'Updates on lt_speakers.yml from cfp-app', branch: 'lt_speakers-from-cfpapp')
+        p res.body unless res.code.to_s == '201'
+      end
+    end
+
     desc 'Generate presentations.yml and schedule.yml from cfp-app and send a PR to the RKO repo'
     task :schedule, [:event_slug] => :environment do |t, args|
       require 'ruby_kaigi'
