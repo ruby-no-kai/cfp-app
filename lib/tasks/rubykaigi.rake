@@ -60,6 +60,25 @@ namespace :rubykaigi do
       end
     end
 
+    desc 'Generate lt_presentations.yml from cfp-app and send a PR to the RKO repo'
+    task :lt_presentations, [:event_slug] => :environment do |t, args|
+      require 'ruby_kaigi'
+
+      event = Event.find_by! slug: args[:event_slug]
+      repo = RubyKaigi::RKO.clone
+      new_presentations_yaml = RubyKaigi::CfpApp.presentations(event).to_yaml
+      old_presentations_yaml = repo.pull_requested_lt_presentations || repo.lt_presentations
+
+      if new_presentations_yaml == old_presentations_yaml
+        Rails.logger.info 'No change.'
+      else
+        repo.lt_presentations = new_presentations_yaml
+        p res = repo.pr(title: 'Updates on lt_presentations.yml from cfp-app', branch: 'lt_presentations-from-cfpapp')
+        p res.body unless res.code.to_s == '201'
+        Rails.logger.info 'PRed.'
+      end
+    end
+
     desc 'Generate sponsors.yml from gist and send a PR to the RKO repo'
     task sponsors: :environment do |t, args|
       require 'ruby_kaigi'
