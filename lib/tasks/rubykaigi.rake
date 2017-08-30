@@ -38,7 +38,7 @@ namespace :rubykaigi do
       end
     end
 
-    desc 'Generate presentations.yml and schedule.yml from cfp-app and send a PR to the RKO repo'
+    desc 'Generate presentations.yml and schedule.yml from cfp-app and send PRs to the RKO repo'
     task :schedule, [:event_slug] => :environment do |t, args|
       require 'ruby_kaigi'
 
@@ -46,15 +46,24 @@ namespace :rubykaigi do
       repo = RubyKaigi::RKO.clone
       new_schedule_yaml = RubyKaigi::CfpApp.schedule(event).to_yaml
       old_schedule_yaml = repo.pull_requested_schedule || repo.schedule
+
+      if new_schedule_yaml == old_schedule_yaml
+        Rails.logger.info 'No change for schedule.yml.'
+      else
+        repo.schedule = new_schedule_yaml
+        p res = repo.pr(title: 'Updates on schedule.yml from cfp-app', branch: 'schedule-from-cfpapp')
+        p res.body unless res.code.to_s == '201'
+        Rails.logger.info 'PRed.'
+      end
+
       new_presentations_yaml = RubyKaigi::CfpApp.presentations(event).to_yaml
       old_presentations_yaml = repo.pull_requested_presentations || repo.presentations
 
-      if (new_schedule_yaml == old_schedule_yaml) || (new_presentations_yaml == old_presentations_yaml)
-        Rails.logger.info 'No change.'
+      if new_presentations_yaml == old_presentations_yaml
+        Rails.logger.info 'No change for presentation.yml.'
       else
-        repo.schedule = new_schedule_yaml
         repo.presentations = new_presentations_yaml
-        p res = repo.pr(title: 'Updates on schedule.yml/presentations.yml from cfp-app', branch: 'schedule-from-cfpapp')
+        p res = repo.pr(title: 'Updates on presentations.yml from cfp-app', branch: 'presentations-from-cfpapp')
         p res.body unless res.code.to_s == '201'
         Rails.logger.info 'PRed.'
       end
