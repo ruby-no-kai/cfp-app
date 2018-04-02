@@ -1,6 +1,6 @@
 module RubyKaigi
-  # 2017
-  KEYNOTES = %w(yukihiro_matz n0kada vnmakarov)
+  # 2018
+  KEYNOTES = %w(yukihiro_matz ktou eregontp)
   KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138]  # matz, justin, nalsh, nobu, matz, vnmakarov
 
   DISCUSSION_SESSIONS = [127, 172].freeze  # committers, committers
@@ -68,14 +68,14 @@ module RubyKaigi
   class RKO
     def self.clone
       Dir.chdir '/tmp' do
-        `git clone https://#{ENV['GITHUB_TOKEN']}@github.com/ruby-no-kai/rubykaigi2017.git`
-        Dir.chdir 'rubykaigi2017' do
+        `git clone https://#{ENV['GITHUB_TOKEN']}@github.com/ruby-no-kai/rubykaigi2018.git`
+        Dir.chdir 'rubykaigi2018' do
           `git checkout master`
-          `git remote add rubykaigi-bot https://#{ENV['GITHUB_TOKEN']}@github.com/rubykaigi-bot/rubykaigi2017.git`
+          `git remote add rubykaigi-bot https://#{ENV['GITHUB_TOKEN']}@github.com/rubykaigi-bot/rubykaigi2018.git`
           `git pull --all`
         end
       end
-      new '/tmp/rubykaigi2017'
+      new '/tmp/rubykaigi2018'
     end
 
     def initialize(path)
@@ -84,17 +84,17 @@ module RubyKaigi
 
     %w(speakers lt_speakers sponsors schedule presentations lt_presentations).each do |name|
       define_method name do
-        File.read "#{@path}/data/year_2017/#{name}.yml"
+        File.read "#{@path}/data/year_2018/#{name}.yml"
       end
 
       define_method "#{name}=" do |content|
-        File.write "#{@path}/data/year_2017/#{name}.yml", content
+        File.write "#{@path}/data/year_2018/#{name}.yml", content
       end
 
       define_method "pull_requested_#{name}" do
         begin
           `git checkout #{name}-from-cfpapp`
-          File.read "#{@path}/data/year_2017/#{name}.yml"
+          File.read "#{@path}/data/year_2018/#{name}.yml"
         ensure
           `git checkout master`
         end
@@ -106,7 +106,7 @@ module RubyKaigi
         `git checkout -b #{branch}`
         `git config user.name "RubyKaigi Bot" && git config user.email "amatsuda@rubykaigi.org"`
         `git commit -am '#{title}' && git push -u rubykaigi-bot HEAD`
-        uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi2017/pulls'
+        uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi2018/pulls'
         Net::HTTP.post uri, {'title' => title, 'head' => "rubykaigi-bot:#{branch}", 'base' => 'master'}.to_json, {'Authorization' => "token #{ENV['GITHUB_TOKEN']}"}
       end
     end
@@ -117,13 +117,13 @@ module RubyKaigi
       uri = URI 'https://api.github.com/gists/d6f1dd44017aac2ec4031aa9178f99e8'
       uri.query = URI.encode_www_form 'access_token': ENV['GIST_TOKEN']
       res = Net::HTTP.get(uri)
-      JSON.parse(res)['files']['rubykaigi2017_sponsors.yml']['content']
+      JSON.parse(res)['files']['rubykaigi2018_sponsors.yml']['content']
     end
   end
 
   module Speakers
 #       def self.get
-#         uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi2017/contents/data/year_2017/speakers.yml'
+#         uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi2018/contents/data/year_2018/speakers.yml'
 #         uri.query = URI.encode_www_form access_token: #{ENV['GITHUB_TOKEN']}
 #         res = Net::HTTP.get(uri)
 #         Base64.decode64(JSON.parse(res))['content']
