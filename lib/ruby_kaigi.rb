@@ -25,7 +25,7 @@ module RubyKaigi
       keynotes = keynotes.sort_by {|k, _| KEYNOTES.index k}.to_h
 
       speakers = {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by do |p|
-        p.last['name'].gsub(" (@hatappi)", "").split(" ").last.downcase
+        p.last['name'].split(" ").last.downcase
       end.to_h}
       speakers.delete 'keynotes' if speakers['keynotes'].empty?
       speakers
