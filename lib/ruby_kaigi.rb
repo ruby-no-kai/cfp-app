@@ -24,9 +24,7 @@ module RubyKaigi
       keynotes, speakers = people.partition {|p| KEYNOTES.include? p.first}
       keynotes = keynotes.sort_by {|k, _| KEYNOTES.index k}.to_h
 
-      speakers = {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by do |p|
-        p.last['name'].split(" ").last.downcase
-      end.to_h}
+      speakers = {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by {|p| p.last['name'].downcase }.to_h}
       speakers.delete 'keynotes' if speakers['keynotes'].empty?
       speakers
     end
