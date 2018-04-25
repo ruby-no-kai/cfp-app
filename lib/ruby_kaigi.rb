@@ -114,7 +114,7 @@ module RubyKaigi
 
   module Gist
     def self.sponsors_yml
-      uri = URI 'https://api.github.com/gists/d6f1dd44017aac2ec4031aa9178f99e8'
+      uri = URI 'https://api.github.com/gists/9f71ac78c76cd7132be1076702002d47'
       uri.query = URI.encode_www_form 'access_token': ENV['GIST_TOKEN']
       res = Net::HTTP.get(uri)
       JSON.parse(res)['files']['rubykaigi2018_sponsors.yml']['content']
