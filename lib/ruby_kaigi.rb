@@ -1,7 +1,7 @@
 module RubyKaigi
   # 2018
   KEYNOTES = %w(yukihiro_matz ktou eregontp)
-  KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138]  # matz, justin, nalsh, nobu, matz, vnmakarov
+  KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138, 215, 235, 258]  # matz, justin, nalsh, nobu, matz, vnmakarov, matz, kou, eregon
 
   DISCUSSION_SESSIONS = [127, 172].freeze  # committers, committers
   LT_SESSIONS = [159].freeze  # LT
