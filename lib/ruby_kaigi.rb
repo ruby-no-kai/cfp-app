@@ -42,10 +42,10 @@ module RubyKaigi
     def self.schedule(event)
       first_date = event.start_date.to_date
 
-      result = event.sessions.includes(proposal: {speakers: {person: :services}}).group_by(&:conference_day).sort_by {|day, _| day}.each_with_object({}) do |(day, sessions), schedule|
+      result = event.sessions.includes([{proposal: {speakers: {person: :services}}}, :room]).group_by(&:conference_day).sort_by {|day, _| day}.each_with_object({}) do |(day, sessions), schedule|
         events = sessions.group_by {|s| [s.start_time, s.end_time]}.sort_by {|(start_time, end_time), _| [start_time, end_time]}.map do |(start_time, end_time), sessions_per_time|
           event = {'type' => nil, 'begin' => start_time.strftime('%H:%M'), 'end' => end_time.strftime('%H:%M')}
-          talks = sessions_per_time.sort_by(&:room_id).each_with_object({}) do |session, h|
+          talks = sessions_per_time.sort_by {|s| s.room&.grid_position }.each_with_object({}) do |session, h|
             h[session.room.room_number] = session.proposal.speakers.first.person.social_account if session.proposal
           end
           if talks.any?
