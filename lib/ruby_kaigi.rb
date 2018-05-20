@@ -4,7 +4,7 @@ module RubyKaigi
   KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138, 215, 235, 258]  # matz, justin, nalsh, nobu, matz, vnmakarov, matz, kou, eregon
 
   DISCUSSION_SESSIONS = [127, 172].freeze  # committers, committers
-  LT_SESSIONS = [159].freeze  # LT
+  LT_SESSIONS = [159, 233].freeze  # LT
 
   module CfpApp
     def self.speakers(event)
