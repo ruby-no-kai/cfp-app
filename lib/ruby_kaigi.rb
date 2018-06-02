@@ -12,6 +12,7 @@ module RubyKaigi
         person = sp.person
         tw = person.services.detect {|s| s.provider == 'twitter'}&.account_name
         gh = person.services.detect {|s| s.provider == 'github'}&.account_name
+        next if tw == "ktou2" || tw == "mrkn2"
         id = tw || gh
         bio = if sp.bio.present? && (sp.bio != 'N/A')
           sp.bio
