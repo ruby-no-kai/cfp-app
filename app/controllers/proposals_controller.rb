@@ -95,6 +95,9 @@ class ProposalsController < ApplicationController
     if @proposal.save
       current_user.update_bio
       flash[:confirm] = setup_flash_message
+      if (slack_url = ENV['SLACK_WEBHOOK_URL'])
+        Net::HTTP.post_form URI(slack_url), payload: {text: %(:ika: #{current_user.name} submitted <#{reviewer_event_proposal_url @event, @proposal}|a new proposal>!)}.to_json rescue nil
+      end
       redirect_to event_proposal_url(event_slug: @event.slug, uuid: @proposal)
     else
       flash[:danger] = "There was a problem saving your proposal."
