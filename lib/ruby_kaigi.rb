@@ -1,6 +1,6 @@
 module RubyKaigi
   # 2019
-  KEYNOTES = %w(yukihiro_matz nagachika jeremyevans)
+  KEYNOTES = %w(yukihiro_matz nagachika jeremyevans0)
   KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138, 215, 235, 258, 295, 311, 371]  # matz, justin, nalsh, nobu, matz, vnmakarov, matz, kou, eregon, matz, nagachika, jeremyevans
 
   DISCUSSION_SESSIONS = [127, 172].freeze  # committers, committers
