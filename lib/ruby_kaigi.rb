@@ -3,8 +3,8 @@ module RubyKaigi
   KEYNOTES = %w(yukihiro_matz nagachika jeremyevans0)
   KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138, 215, 235, 258, 295, 311, 371]  # matz, justin, nalsh, nobu, matz, vnmakarov, matz, kou, eregon, matz, nagachika, jeremyevans
 
-  DISCUSSION_SESSIONS = [127, 172].freeze  # committers, committers
-  LT_SESSIONS = [159, 233].freeze  # LT
+  DISCUSSION_SESSIONS = [127, 172, 330].freeze  # committers, committers
+  LT_SESSIONS = [159, 233, 329].freeze  # LT
 
   module CfpApp
     def self.speakers(event)
