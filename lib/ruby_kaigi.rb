@@ -5,6 +5,7 @@ module RubyKaigi
 
   DISCUSSION_SESSIONS = [127, 172, 330].freeze  # committers, committers
   LT_SESSIONS = [159, 233, 329].freeze  # LT
+  WORKSHOP_PROPOSALS = {794 => 'mrkn_workshop'}
 
   module CfpApp
     def self.speakers(event)
@@ -35,7 +36,8 @@ module RubyKaigi
         speakers = p.speakers.sort_by(&:created_at).map {|sp| sp.person.social_account }
         lang = (p.custom_fields['spoken language in your talk'] || 'JA').downcase.in?(['ja', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)']) ? 'JA' : 'EN'
         type = p.session.id.in?(KEYNOTE_SESSIONS) ? 'keynote' : (p.session.id.in?(DISCUSSION_SESSIONS) ? 'discussion' : 'presentation')
-        h[speakers.first] = {'title' => p.title, 'type' => type, 'language' => lang, 'description' => p.abstract.gsub("\r\n", "\n").chomp, 'speakers' => speakers.map {|sp| {'id' => sp}}}
+        speaker_name = WORKSHOP_PROPOSALS[p.id] || speakers.first
+        h[speaker_name] = {'title' => p.title, 'type' => type, 'language' => lang, 'description' => p.abstract.gsub("\r\n", "\n").chomp, 'speakers' => speakers.map {|sp| {'id' => sp}}}
       end
     end
 
@@ -46,7 +48,9 @@ module RubyKaigi
         events = sessions.group_by {|s| [s.start_time, s.end_time]}.sort_by {|(start_time, end_time), _| [start_time, end_time]}.map do |(start_time, end_time), sessions_per_time|
           event = {'type' => nil, 'begin' => start_time.strftime('%H:%M'), 'end' => end_time.strftime('%H:%M')}
           talks = sessions_per_time.sort_by {|s| s.room&.grid_position }.each_with_object({}) do |session, h|
-            h[session.room.room_number] = session.proposal.speakers.first.person.social_account if session.proposal
+            if session.proposal
+              h[session.room.room_number] = WORKSHOP_PROPOSALS[session.proposal_id] || session.proposal.speakers.first.person.social_account
+            end
           end
           if talks.any?
             event['type'] = sessions_per_time.any? {|s| s.id.in?(KEYNOTE_SESSIONS)} ? 'keynote' : 'talk'
