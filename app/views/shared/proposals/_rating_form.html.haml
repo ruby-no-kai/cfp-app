@@ -10,7 +10,7 @@
         = f.label :score, "Rating"
         .rating-form-wrapper
           %ul.star-rating
-            - (1..5).each do |score|
+            - (1..10).each do |score|
               %li.star-wrapper{class: disabled ? "ratings-closed" : nil}
                 = f.label :score do
                   %span.star
