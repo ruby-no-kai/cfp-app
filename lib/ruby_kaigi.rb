@@ -22,8 +22,12 @@ module RubyKaigi
         h = {'id' => id, 'name' => person.name, 'bio' => bio, 'github_id' => gh, 'twitter_id' => tw, 'gravatar_hash' => Digest::MD5.hexdigest(person.email)}
         hash[id] = h
       end
-      keynotes, speakers = people.partition {|p| KEYNOTES.include? p.first}
-      keynotes = keynotes.sort_by {|k, _| KEYNOTES.index k}.to_h
+      if event.slug.end_with? 'LT'
+        speakers = people
+      else
+        keynotes, speakers = people.partition {|p| KEYNOTES.include? p.first}
+        keynotes = keynotes.sort_by {|k, _| KEYNOTES.index k}.to_h
+      end
 
       speakers = {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by {|p| p.last['name'].downcase }.to_h}
       speakers.delete 'keynotes' if speakers['keynotes'].empty?
