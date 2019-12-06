@@ -45,7 +45,7 @@
   = f.input :pitch, input_html: { class: 'watched', rows: 5 },
     hint: 'Explain why this talk should be considered and what makes you qualified to speak on the topic.'#, popover_icon: { content: pitch_tooltip }
 
-- if event.custom_fields.any?
+- unless event.custom_fields.empty?
   - event.custom_fields.each do |custom_field|
     .form-group
       = f.label custom_field

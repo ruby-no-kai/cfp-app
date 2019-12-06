@@ -15,7 +15,7 @@
   .markdown{ data: { 'field-id' => 'proposal_pitch' } }
     =proposal.pitch_markdown
 
-- if proposal.custom_fields.any?
+- unless proposal.custom_fields.empty?
   - proposal.proposal_data[:custom_fields].select do |key,value|
     .proposal-section
       %h3.control-label= key.capitalize
