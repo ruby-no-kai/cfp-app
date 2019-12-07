@@ -191,6 +191,7 @@ class Proposal < ApplicationRecord
   end
 
   def average_rating
+    return self[:average_rating] if self[:average_rating]
     return nil if ratings.empty?
 
     ratings.map(&:score).inject(:+).to_f / ratings.size
