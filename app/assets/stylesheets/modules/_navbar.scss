@@ -53,17 +53,22 @@
   }
 }
 
+.navbar-brand {
+  > img {
+  width: 150px;
+}
+}
 .nav {
   display: flex;
   align-items: center;
-  
+
   > li {
     > a {
       padding: 5px 10px;
       color: $gray-light;
     }
   }
-  
+
 }
 
 /*------------------------------------------------------------------
