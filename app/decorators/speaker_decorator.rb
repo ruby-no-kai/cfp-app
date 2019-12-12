@@ -18,7 +18,9 @@ class SpeakerDecorator < Draper::Decorator
 
   private def github_uid_to_uname(uid)
     api_uri = URI.parse "https://api.github.com/user/#{uid}"
-    JSON.parse(Net::HTTP.get(api_uri))['login']
+    Rails.cache.fetch api_uri do
+      JSON.parse(Net::HTTP.get(api_uri))['login']
+    end
   end
 
   def link_to_twitter
@@ -32,7 +34,9 @@ class SpeakerDecorator < Draper::Decorator
 
   private def twitter_uid_to_uname(uid)
     twitter_uri = "https://twitter.com/intent/user?user_id=#{uid}"
-    html = Net::HTTP.get URI.parse(twitter_uri)
-    html.scan(/<span class="nickname">@(.*)<\/span>/).first.first
+    Rails.cache.fetch twitter_uri do
+      html = Net::HTTP.get URI.parse(twitter_uri)
+      html.scan(/<span class="nickname">@(.*)<\/span>/).first&.first
+    end
   end
 end
