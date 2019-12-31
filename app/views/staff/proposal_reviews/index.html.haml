@@ -27,10 +27,12 @@
         %th
         %th
         %th
+        %th
       %tr
         %th Score
         %th Your<br/>Score
         %th Ratings
+        %th Speakers
         %th Title
         %th Session Format
         %th Track
@@ -48,6 +50,8 @@
             = proposal.your_score
           %td.ratings-count
             = proposal.ratings_count
+          %td
+            = proposal.speaker_names
           %td.title
             = proposal.title_link_for_review
             = state_label(small: true) if proposal.withdrawn?
