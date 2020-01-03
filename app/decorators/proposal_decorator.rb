@@ -81,6 +81,10 @@ class ProposalDecorator < ApplicationDecorator
     object.speakers.map(&:name).join(', ')
   end
 
+  def speaker_names_with_links
+    object.speakers.map {|s| h.link_to(s.name, h.event_staff_program_speaker_path(s.proposal.event, s)) }.join(', ').html_safe
+  end
+
   def speaker_emails
     object.speakers.map(&:email).join(', ')
   end
