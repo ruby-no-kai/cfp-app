@@ -16,6 +16,6 @@
     - input_class = internal?(f.object) ? 'form-control mention' : 'form-control'
     = f.text_area :body, class: input_class, placeholder: 'Add your comment', rows: 5, data: { mention_names: internal?(f.object) ? @mention_names : nil }
   .form-group
-    %button.btn.btn-success.save-comment(type="submit")
+    %button.btn.btn-success.save-comment(type="submit"){class: "#{'public-comment' unless internal?(f.object)}"}
       %span.glyphicon.glyphicon-ok
       Comment
