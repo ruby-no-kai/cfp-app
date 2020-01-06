@@ -80,4 +80,10 @@ $(function() {
       }
     });
   }
+
+  $('button.save-comment.public-comment').click(function() {
+    if (!confirm("Are you sure you're posting a Public comment?")) {
+      return false;
+    }
+  });
 });
