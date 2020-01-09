@@ -322,6 +322,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.datetime "remember_created_at", precision: nil
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.string "github_uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token"
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
