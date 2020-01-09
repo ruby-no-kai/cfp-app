@@ -184,6 +184,7 @@ end
 #  remember_created_at    :datetime
 #  created_at             :datetime
 #  updated_at             :datetime
+#  github_uid             :string
 #
 # Indexes
 #
