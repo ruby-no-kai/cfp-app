@@ -64,6 +64,14 @@ class User < ApplicationRecord
     user.tap(&:save!)
   end
 
+  def github_uid
+    self[:github_uid] || (uid if (provider == 'github'))
+  end
+
+  def twitter_uid
+    self[:twitter_uid] || (uid if(provider == 'twitter'))
+  end
+
   def check_pending_invite_email
     if pending_invite_email.present? && pending_invite_email == email
       skip_confirmation!
