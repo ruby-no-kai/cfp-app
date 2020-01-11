@@ -182,6 +182,18 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.index ["event_id"], name: "index_rooms_on_event_id"
   end
 
+  create_table "services", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.integer "user_id"
+    t.string "uname"
+    t.string "account_name"
+    t.string "uemail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["user_id"], name: "index_services_on_user_id"
+  end
+
   create_table "session_format_configs", force: :cascade do |t|
     t.bigint "website_id"
     t.bigint "session_format_id"
