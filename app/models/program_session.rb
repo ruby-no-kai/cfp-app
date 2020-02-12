@@ -73,6 +73,14 @@ class ProgramSession < ApplicationRecord
     where(session_format_id: session_format.id)
   end
 
+  def title
+    proposal&.title || super
+  end
+
+  def abstract
+    proposal&.abstract || super
+  end
+
   def self.create_from_proposal(proposal)
     self.transaction do
       ps = ProgramSession.create!(event_id: proposal.event_id,
