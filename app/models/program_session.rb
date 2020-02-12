@@ -69,6 +69,14 @@ class ProgramSession < ApplicationRecord
   end
   scope :emails, -> { joins(:speakers).pluck(:speaker_email).uniq }
 
+  def title
+    proposal&.title || super
+  end
+
+  def abstract
+    proposal&.abstract || super
+  end
+
   def self.create_from_proposal(proposal)
     self.transaction do
       ps = ProgramSession.create!(event_id: proposal.event_id,
