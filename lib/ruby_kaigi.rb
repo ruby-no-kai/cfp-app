@@ -1,37 +1,40 @@
 module RubyKaigi
-  # 2019
-  KEYNOTES = %w(yukihiro_matz nagachika jeremyevans0)
-  KEYNOTE_SESSIONS = [125, 89, 126, 187, 197, 138, 215, 235, 258, 295, 311, 371]  # matz, justin, nalsh, nobu, matz, vnmakarov, matz, kou, eregon, matz, nagachika, jeremyevans
-
   DISCUSSION_SESSIONS = [127, 172, 330].freeze  # committers, committers
   LT_SESSIONS = [159, 233, 329].freeze  # LT
   WORKSHOP_PROPOSALS = {794 => 'mrkn_workshop'}
 
   module CfpApp
     def self.speakers(event)
-      people = Speaker.joins(:proposal).includes(person: :services).merge(event.proposals.accepted.confirmed).order(:created_at).each_with_object({}) do |sp, hash|
-        person = sp.person
-        tw = person.services.detect {|s| s.provider == 'twitter'}&.account_name
-        gh = person.services.detect {|s| s.provider == 'github'}&.account_name
-        id = tw || gh
+      keynotes, speakers = {}, {}
+      Speaker.joins(:proposal).includes(:user, program_session: [:session_format, :time_slot]).merge(event.proposals.accepted.confirmed).order('time_slots.conference_day, time_slots.start_time').decorate.each do |sp|
+        user = sp.user
+        tw = if user.twitter_account
+          user.twitter_account
+        elsif user.twitter_uid
+          sp.send :twitter_uid_to_uname, user.twitter_uid
+        end
+        gh = if user.github_account
+          user.github_account
+        elsif user.github_uid
+          sp.send :github_uid_to_uname, user.github_uid
+        end
+        id = tw || gh || user.name.downcase.tr(' ', '_')
         bio = if sp.bio.present? && (sp.bio != 'N/A')
           sp.bio
         else
-          person.bio || ''
-        end.gsub("\r\n", "\n").chomp
-        h = {'id' => id, 'name' => person.name, 'bio' => bio, 'github_id' => gh, 'twitter_id' => tw, 'gravatar_hash' => Digest::MD5.hexdigest(person.email)}
-        hash[id] = h
-      end
-      if event.slug.end_with? 'LT'
-        speakers = people
-      else
-        keynotes, speakers = people.partition {|p| KEYNOTES.include? p.first}
-        keynotes = keynotes.sort_by {|k, _| KEYNOTES.index k}.to_h
+          user.bio || ''
+        end.gsub("\r\n", "\n").strip
+        h = {'id' => id, 'name' => user.name, 'bio' => bio, 'github_id' => gh, 'twitter_id' => tw, 'gravatar_hash' => Digest::MD5.hexdigest(user.email)}
+        if sp.program_session.session_format.name == 'Keynote'
+          keynotes[id] = h
+        else
+          speakers[id] = h
+        end
       end
 
-      speakers = {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by {|p| p.last['name'].downcase }.to_h}
-      speakers.delete 'keynotes' if speakers['keynotes'].empty?
-      speakers
+      result = {'keynotes' => keynotes.to_h, 'speakers' => speakers.sort_by {|p| p.last['name'].downcase }.to_h }
+      result.delete 'keynotes' if result['keynotes'].empty?
+      result
     end
 
     def self.presentations(event)
