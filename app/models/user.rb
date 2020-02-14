@@ -180,6 +180,7 @@ end
 #  github_uid             :string
 #  twitter_uid            :string
 #  github_account         :string
+#  twitter_account        :string
 #
 # Indexes
 #
