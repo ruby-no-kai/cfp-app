@@ -22,6 +22,12 @@
             = f.label :bio
             = f.text_area :bio, class: 'form-control', placeholder: 'Enter your bio', rows: 7, maxlength: 500
             %p.help-block Bio is limited to 500 characters.
+          %p
+            = f.label :github_account, 'GitHub Account'
+            = f.text_field :github_account, class: 'form-control', placeholder: 'Your GitHub account name', autofocus: true
+          %p
+            = f.label :twitter_account
+            = f.text_field :twitter_account, class: 'form-control', placeholder: 'Your Twitter account name', autofocus: true
 
     %fieldset.col-md-6
       .widget
