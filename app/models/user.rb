@@ -179,6 +179,7 @@ end
 #  updated_at             :datetime
 #  github_uid             :string
 #  twitter_uid            :string
+#  github_account         :string
 #
 # Indexes
 #
