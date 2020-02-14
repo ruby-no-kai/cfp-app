@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(version: 2020_12_13_170301) do
     t.datetime "updated_at"
     t.string "github_uid"
     t.string "twitter_uid"
+    t.string "github_account"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token"
     t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
