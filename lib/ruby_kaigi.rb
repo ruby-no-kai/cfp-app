@@ -8,23 +8,13 @@ module RubyKaigi
       keynotes, speakers = {}, {}
       Speaker.joins(:proposal).includes(:user, program_session: [:session_format, :time_slot]).merge(event.proposals.accepted.confirmed).order('time_slots.conference_day, time_slots.start_time').decorate.each do |sp|
         user = sp.user
-        tw = if user.twitter_account
-          user.twitter_account
-        elsif user.twitter_uid
-          sp.send :twitter_uid_to_uname, user.twitter_uid
-        end
-        gh = if user.github_account
-          user.github_account
-        elsif user.github_uid
-          sp.send :github_uid_to_uname, user.github_uid
-        end
-        id = tw || gh || user.name.downcase.tr(' ', '_')
+        id = sp.social_account
         bio = if sp.bio.present? && (sp.bio != 'N/A')
           sp.bio
         else
           user.bio || ''
         end.gsub("\r\n", "\n").strip
-        h = {'id' => id, 'name' => user.name, 'bio' => bio, 'github_id' => gh, 'twitter_id' => tw, 'gravatar_hash' => Digest::MD5.hexdigest(user.email)}
+        h = {'id' => id, 'name' => user.name, 'bio' => bio, 'github_id' => sp.github_account, 'twitter_id' => sp.twitter_account, 'gravatar_hash' => Digest::MD5.hexdigest(user.email)}
         if sp.program_session.session_format.name == 'Keynote'
           keynotes[id] = h
         else
