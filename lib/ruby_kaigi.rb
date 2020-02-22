@@ -28,13 +28,13 @@ module RubyKaigi
     end
 
     def self.presentations(event)
-      proposals = event.proposals.joins(:session).includes([{speakers: {person: :services}}, :session]).accepted.confirmed.order('sessions.conference_day, sessions.start_time, sessions.room_id')
-      presentations = proposals.each_with_object({}) do |p, h|
-        speakers = p.speakers.sort_by(&:created_at).map {|sp| sp.person.social_account }
-        lang = (p.custom_fields['spoken language in your talk'] || 'JA').downcase.in?(['ja', 'jp', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)']) ? 'JA' : 'EN'
-        type = p.session.id.in?(KEYNOTE_SESSIONS) ? 'keynote' : (p.session.id.in?(DISCUSSION_SESSIONS) ? 'discussion' : 'presentation')
-        speaker_name = WORKSHOP_PROPOSALS[p.id] || speakers.first
-        h[speaker_name] = {'title' => p.title, 'type' => type, 'language' => lang, 'description' => p.abstract.gsub("\r\n", "\n").chomp, 'speakers' => speakers.map {|sp| {'id' => sp}}}
+      time_slots = event.time_slots.joins([:room, program_session: :proposal]).includes(:room, program_session: [:proposal, {speakers: :user}]).order('time_slots.conference_day, time_slots.start_time, rooms.grid_position')
+      time_slots.to_h do |ts|
+        ps = ts.program_session
+        speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
+        lang = (ps.proposal.custom_fields['spoken language in your talk'] || 'JA').downcase.in?(['ja', 'jp', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)']) ? 'JA' : 'EN'
+        type = ps.session_format.name == 'Keynote' ? 'keynote' : 'presentation'
+        [speakers.first, {title: ps.title, type: type, language: lang, description: ps.abstract.gsub("\r\n", "\n").chomp, speakers: speakers.map {|sp| {id: sp} }}.deep_stringify_keys]
       end
     end
 
