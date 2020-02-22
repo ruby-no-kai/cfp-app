@@ -14,6 +14,18 @@ class SpeakerDecorator < ApplicationDecorator
     "#{object.name} (#{object.email})"
   end
 
+  def github_account
+    user.github_account || (user.github_uid && github_uid_to_uname(user.github_uid))
+  end
+
+  def twitter_account
+    user.twitter_account || (user.twitter_uid && twitter_uid_to_uname(user.twitter_uid))
+  end
+
+  def social_account
+    twitter_account || github_account || user.name.downcase.tr(' ', '_')
+  end
+
   def link_to_github
     if user&.github_uid
       uname = github_uid_to_uname user.github_uid
