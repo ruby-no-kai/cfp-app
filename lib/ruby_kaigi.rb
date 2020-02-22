@@ -41,27 +41,20 @@ module RubyKaigi
     def self.schedule(event)
       first_date = event.start_date.to_date
 
-      result = event.sessions.includes([{proposal: {speakers: {person: :services}}}, :room]).group_by(&:conference_day).sort_by {|day, _| day}.each_with_object({}) do |(day, sessions), schedule|
-        events = sessions.group_by {|s| [s.start_time, s.end_time]}.sort_by {|(start_time, end_time), _| [start_time, end_time]}.map do |(start_time, end_time), sessions_per_time|
-          event = {'type' => nil, 'begin' => start_time.strftime('%H:%M'), 'end' => end_time.strftime('%H:%M')}
-          talks = sessions_per_time.sort_by {|s| s.room&.grid_position }.each_with_object({}) do |session, h|
-            if session.proposal
-              h[session.room.room_number] = WORKSHOP_PROPOSALS[session.proposal_id] || session.proposal.speakers.first.person.social_account
-            end
-          end
-          if talks.any?
-            event['type'] = sessions_per_time.any? {|s| s.id.in?(KEYNOTE_SESSIONS)} ? 'keynote' : 'talk'
-            event['talks'] = talks
-          elsif sessions_per_time.any? {|s| s.id.in?(LT_SESSIONS)}
-            event['name'] = sessions_per_time.first.title
-            event['type'] = 'lt'
+      time_slots = event.time_slots.includes(:room, program_session: {speakers: :user})
+
+      time_slots.group_by(&:conference_day).sort_by {|day, _| day }.to_h do |day, time_slots_per_day|
+        events = time_slots_per_day.group_by {|s| [s.start_time, s.end_time] }.sort_by {|(start_time, end_time), _| [start_time, end_time] }.map do |(start_time, end_time), time_slots|
+          if time_slots.one? && time_slots.first['presenter'] == 'break'
+            {type: 'break', begin: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'), name: time_slots.first.title}
           else
-            event['name'] = sessions_per_time.first.title
-            event['type'] = 'break'
+            program_sessions = time_slots.select(&:program_session).sort_by {|s| s.room.grid_position }.map(&:program_session)
+            type = program_sessions.one? && program_sessions.first.session_format.name == 'Keynote' ? 'keynote' : 'talks'
+            talks = program_sessions.to_h {|ps| [ps.time_slot.room.name, ps.speakers.first.decorate.social_account] }
+            {type: type, begin: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'), talks: talks}
           end
-          event
         end
-        schedule[(day - 1).days.since(first_date).strftime('%b%d').downcase] = {'events' => events}
+        [(day - 1).days.since(first_date).strftime('%b%d').downcase, {events: events}.deep_stringify_keys]
       end
     end
   end
