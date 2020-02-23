@@ -49,7 +49,7 @@ module RubyKaigi
             {type: 'break', begin: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'), name: time_slots.first.title}
           else
             program_sessions = time_slots.select(&:program_session).sort_by {|s| s.room.grid_position }.map(&:program_session)
-            type = program_sessions.one? && program_sessions.first.session_format.name == 'Keynote' ? 'keynote' : 'talks'
+            type = program_sessions.one? && program_sessions.first.session_format.name == 'Keynote' ? 'keynote' : 'talk'
             talks = program_sessions.to_h {|ps| [ps.time_slot.room.name, ps.speakers.first.decorate.social_account] }
             {type: type, begin: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'), talks: talks}
           end
