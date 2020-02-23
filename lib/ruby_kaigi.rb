@@ -33,7 +33,7 @@ module RubyKaigi
         ps = ts.program_session
         speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
         lang = (ps.proposal.custom_fields['spoken language in your talk'] || 'JA').downcase.in?(['ja', 'jp', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)']) ? 'JA' : 'EN'
-        type = ps.session_format.name == 'Keynote' ? 'keynote' : 'presentation'
+        type = ps.session_format.name.sub('Regular Session', 'Presentation').downcase
         [speakers.first, {title: ps.title, type: type, language: lang, description: ps.abstract.gsub("\r\n", "\n").chomp, speakers: speakers.map {|sp| {id: sp} }}.deep_stringify_keys]
       end
     end
