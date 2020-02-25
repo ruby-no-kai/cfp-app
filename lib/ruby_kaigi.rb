@@ -45,8 +45,8 @@ module RubyKaigi
 
       time_slots.group_by(&:conference_day).sort_by {|day, _| day }.to_h do |day, time_slots_per_day|
         events = time_slots_per_day.group_by {|s| [s.start_time, s.end_time] }.sort_by {|(start_time, end_time), _| [start_time, end_time] }.map do |(start_time, end_time), time_slots|
-          if time_slots.one? && time_slots.first['presenter'] == 'break'
-            {type: 'break', begin: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'), name: time_slots.first.title}
+          if time_slots.one? && time_slots.first['presenter'].in?(%w(break lt))
+            {type: time_slots.first['presenter'], begin: start_time.strftime('%H:%M'), end: end_time.strftime('%H:%M'), name: time_slots.first.title}
           else
             program_sessions = time_slots.select(&:program_session).sort_by {|s| s.room.grid_position }.map(&:program_session)
             type = program_sessions.one? && program_sessions.first.session_format.name == 'Keynote' ? 'keynote' : 'talk'
