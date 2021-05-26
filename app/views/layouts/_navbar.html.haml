@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
       - if current_event
-        = link_to image_tag('rubykaigi2020_logo.png'), event_path(current_event), class: 'navbar-brand'
+        = link_to 'RubyKaigi Takeout 2021', event_path(current_event), class: 'navbar-brand'
       - else
         = link_to "CFP App", events_path, class: 'navbar-brand'
 

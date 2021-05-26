@@ -6,6 +6,25 @@ $bootstrap-sass-asset-helper: false !default;
 
 //== Colors
 //
+$color-base: #EBE0CE;
+$color-base-light: #F3EDE2;
+$color-main: #0B374D;
+$color-main-light: #545F64;
+$color-accent: #E14033;
+$color-link: #127CAE;
+$color-link-hover: #0092D8;
+$color-light-gray: #BFC6C9;
+
+// background
+$background-color: $color-base;
+
+// text
+$text-default: $color-main;
+$text-accent: $color-accent;
+$text-link: $color-link;
+$text-link-hover: $color-link-hover;
+
+
 //## Gray and brand colors for use across Bootstrap.
 $white: #fff;
 $black: #222;
@@ -44,14 +63,14 @@ $brand-gray:            #ccc;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               #fff !default;
+$body-bg:               $background-color !default;
 //** Global text color on `<body>`.
-$text-color:            $gray-dark !default;
+$text-color:            $text-default !default;
 
 //** Global textual link color.
-$link-color:            $bright-blue !default;
+$link-color:            $text-link !default;
 //** Link hover color set via `darken()` function.
-$link-hover-color:      darken($link-color, 15%) !default;
+$link-hover-color:      $text-link-hover !default;
 //** Link hover decoration.
 $link-hover-decoration: underline !default;
 
@@ -394,9 +413,9 @@ $navbar-padding-horizontal:        floor((30px / 2)) !default;
 $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2) !default;
 $navbar-collapse-max-height:       340px !default;
 
-$navbar-default-color:             $black !default;
-$navbar-default-bg:                $pink !default;
-$navbar-default-border:            darken($navbar-default-bg, 2%) !default;
+$navbar-default-color:             $text-default !default;
+$navbar-default-bg:                $background-color !default;
+$navbar-default-border:            darken($background-color, 10%) !default;
 
 // Navbar links
 $navbar-default-link-color:                $black !default;
@@ -893,9 +912,9 @@ $blockquote-small-color:      $gray-light !default;
 //** Blockquote font size
 $blockquote-font-size:        ($font-size-base * 1.25) !default;
 //** Blockquote border color
-$blockquote-border-color:     $gray-lighter !default;
+$blockquote-border-color:     $color-base !default;
 //** Page header border color
-$page-header-border-color:    $gray-lighter !default;
+$page-header-border-color:    $color-base !default;
 //** Width of horizontal description list titles
 $dl-horizontal-offset:        $component-offset-horizontal !default;
 //** Point at which .dl-horizontal becomes horizontal
