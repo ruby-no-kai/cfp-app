@@ -54,10 +54,16 @@
 }
 
 .navbar-brand {
-  > img {
-  width: 150px;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 20px;
+  color: $text-default !important;
 }
+
+.navbar-default {
+  border-bottom: none;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.2);
 }
+
 .nav {
   display: flex;
   align-items: center;
