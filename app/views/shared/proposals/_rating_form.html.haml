@@ -18,6 +18,8 @@
                     %i.fa.fa-star
                   = f.check_box :score, { class: "star-rating-select",
                       disabled: disabled }, score, nil
+              - if score == 5
+                %br
             - if show_ratings_toggle?(proposal, rating)
               %li.abstain-wrapper
                 = link_to "#", class: "abstain" do
