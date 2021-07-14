@@ -27,6 +27,7 @@ class ProfilesController < ApplicationController
   def user_params
     params.require(:user).permit(:bio, :gender, :ethnicity, :country, :name,
                                  :email, :password, :password_confirmation,
+                                 :github_account, :twitter_account,
                                  teammates_attributes: [:id, :notification_preference])
   end
 
