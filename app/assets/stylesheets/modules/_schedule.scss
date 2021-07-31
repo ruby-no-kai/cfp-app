@@ -1,7 +1,7 @@
 $time-step: 60px;
 $vertical-scale: 1.5;
 $pixel-step: $time-step * $vertical-scale;
-$column-width: 180px;
+$column-width: 360px;
 
 #schedule {
   margin-top: 20px;
@@ -509,7 +509,7 @@ input[type=number]::-webkit-outer-spin-button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 180px;
+    width: 360px;
     height: 40px;
     font-size: 14px;
     line-height: 1.42857;
@@ -523,7 +523,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .schedule_column {
   display: inline-block;
-  min-width: 180px;
+  min-width: 360px;
   background: gainsboro;
 
   .schedule_time_slots {
@@ -564,7 +564,7 @@ input[type=number]::-webkit-outer-spin-button {
         .card_header {
           padding: .3em;
           max-height: 35%;
-          min-height: 22px;
+          min-height: 0px;
           overflow: hidden;
         }
 
