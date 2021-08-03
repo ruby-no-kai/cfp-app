@@ -78,17 +78,17 @@ module RubyKaigi
 
     %w(speakers lt_speakers sponsors schedule presentations lt_presentations).each do |name|
       define_method name do
-        File.read "#{@path}/data/year_2020/#{name}.yml"
+        File.read "#{@path}/data/year_2021_takeout/#{name}.yml"
       end
 
       define_method "#{name}=" do |content|
-        File.write "#{@path}/data/year_2020/#{name}.yml", content
+        File.write "#{@path}/data/year_2021_takeout/#{name}.yml", content
       end
 
       define_method "pull_requested_#{name}" do
         begin
           `git checkout #{name}-from-cfpapp`
-          File.read "#{@path}/data/year_2020/#{name}.yml"
+          File.read "#{@path}/data/year_2021_takeout/#{name}.yml"
         ensure
           `git checkout master`
         end
@@ -117,7 +117,7 @@ module RubyKaigi
 
   module Speakers
 #       def self.get
-#         uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi.org/contents/data/year_2020/speakers.yml'
+#         uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi.org/contents/data/year_2021_takeout/speakers.yml'
 #         uri.query = URI.encode_www_form access_token: #{ENV['GITHUB_TOKEN']}
 #         res = Net::HTTP.get(uri)
 #         Base64.decode64(JSON.parse(res))['content']
