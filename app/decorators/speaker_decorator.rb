@@ -8,11 +8,11 @@ class SpeakerDecorator < Draper::Decorator
   end
 
   def github_account
-    user.identities.where(provider: 'github').pick(:account_name) if user
+    user.identities.where(provider: 'github').pick(:account_name).presence if user
   end
 
   def twitter_account
-    user.identities.where(provider: 'twitter').pick(:account_name) if user
+    user.identities.where(provider: 'twitter').pick(:account_name).presence if user
   end
 
   def social_account
