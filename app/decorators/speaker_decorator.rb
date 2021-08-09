@@ -15,11 +15,11 @@ class SpeakerDecorator < ApplicationDecorator
   end
 
   def github_account
-    user.github_account || (user.github_uid && github_uid_to_uname(user.github_uid))
+    user.github_account.presence || (user.github_uid.presence && github_uid_to_uname(user.github_uid))
   end
 
   def twitter_account
-    user.twitter_account || (user.twitter_uid && twitter_uid_to_uname(user.twitter_uid))
+    user.twitter_account.presence || (user.twitter_uid.presence && twitter_uid_to_uname(user.twitter_uid))
   end
 
   def social_account
@@ -27,7 +27,7 @@ class SpeakerDecorator < ApplicationDecorator
   end
 
   def link_to_github
-    if user&.github_uid
+    if user&.github_uid.presence
       uname = github_uid_to_uname user.github_uid
       h.link_to "@#{uname}", "https://github.com/#{uname}", target: '_blank'
     else
@@ -43,7 +43,7 @@ class SpeakerDecorator < ApplicationDecorator
   end
 
   def link_to_twitter
-    if user&.twitter_uid
+    if user&.twitter_uid.presence
       uname = twitter_uid_to_uname user.twitter_uid
       h.link_to "@#{uname}", "https://twitter.com/#{uname}", target: '_blank'
     else
