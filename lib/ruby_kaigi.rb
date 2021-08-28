@@ -32,7 +32,14 @@ module RubyKaigi
       time_slots.to_h do |ts|
         ps = ts.program_session
         speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
-        lang = (ps.proposal.custom_fields['spoken language in your talk'] || 'JA').downcase.in?(['ja', 'jp', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)']) ? 'JA' : 'EN'
+        lang = case ps.proposal.custom_fields['spoken language in your talk'] || 'JA'
+        when 'Japanese (If allowed, I can record the talk in both Japanese and English)'
+          'EN & JA'
+        when 'JA', 'Ja', 'ja', 'JP', 'Jp', 'jp', 'JAPANESE', 'Japanese', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)'
+          'JA'
+        else
+          'EN'
+        end
         type = ps.session_format.name.sub('Regular Session', 'Presentation').downcase
         [speakers.first, {title: ps.title, type: type, language: lang, description: ps.abstract.gsub("\r\n", "\n").chomp, speakers: speakers.map {|sp| {id: sp} }}.deep_stringify_keys]
       end
