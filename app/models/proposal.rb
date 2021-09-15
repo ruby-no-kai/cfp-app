@@ -277,9 +277,9 @@ class Proposal < ApplicationRecord
   end
 
   def abstract_length
-    return unless abstract_changed? && abstract.gsub(/\r/, '').gsub(/\n/, '').length > 600
+    return unless abstract_changed? && abstract.gsub(/\r/, '').gsub(/\n/, '').length > 1000
 
-    errors.add(:abstract, 'is too long (maximum is 600 characters)')
+    errors.add(:abstract, 'is too long (maximum is 1000 characters)')
   end
 
   def save_tags
