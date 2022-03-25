@@ -8,8 +8,13 @@ module ApplicationHelper
     end
   end
 
-  def boolean_to_words(value)
-    value ? "Yes" : "No"
+  def demographic_label(demographic)
+    case demographic
+      when :gender then
+        "Gender Identity"
+      else
+        demographic.to_s.titleize
+    end
   end
 
   class MarkdownRenderer < Redcarpet::Render::HTML
