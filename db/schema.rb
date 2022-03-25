@@ -217,15 +217,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_02_15_111232) do
   end
 
   create_table "speakers", force: :cascade do |t|
-    t.string "age_range"
     t.text "bio"
     t.datetime "created_at", precision: nil
-    t.string "ethnicity"
     t.bigint "event_id"
-    t.boolean "first_time_speaker"
     t.text "info"
     t.bigint "program_session_id"
-    t.string "pronouns"
     t.bigint "proposal_id"
     t.string "speaker_email"
     t.string "speaker_name"
