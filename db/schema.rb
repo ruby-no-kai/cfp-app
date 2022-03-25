@@ -228,10 +228,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.text "info"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
-    t.string "age_range"
-    t.string "ethnicity"
-    t.boolean "first_time_speaker"
-    t.string "pronouns"
     t.index ["event_id"], name: "index_speakers_on_event_id"
     t.index ["program_session_id"], name: "index_speakers_on_program_session_id"
     t.index ["proposal_id"], name: "index_speakers_on_proposal_id"
