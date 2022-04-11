@@ -6,9 +6,14 @@
 
     = stylesheet_link_tag 'application', media: 'all'
     = stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', media: 'all'
-    = stylesheet_link_tag "//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
 
     = stylesheet_pack_tag "application", media: 'all'
+
+    %link{rel:'preconnect', href:'//fonts.googleapis.com'}
+    %link{rel:'preconnect', href:'//fonts.gstatic.com', crossorigin: ''}
+    = stylesheet_link_tag '//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
+    = stylesheet_link_tag '//fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap'
+
     = javascript_pack_tag "application"
 
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
