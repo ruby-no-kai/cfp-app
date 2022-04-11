@@ -1,0 +1,55 @@
+.grid_container {
+  margin: 75px auto 0;
+}
+
+.grid_headers_wrapper {
+  .schedule_column_head {
+    width: 361px;
+  }
+}
+
+.track-select select {
+  color: $color-main;
+}
+
+.callout .btn {
+  margin-top: 10px;
+}
+
+.schedule_grid .nav_wrapper .schedule_nav {
+  padding-left: 0;
+  position: relative;
+  top: -8px;
+}
+
+.schedule_grid .nav_wrapper .schedule_nav li,
+.schedule_grid .nav_wrapper .schedule_nav li:hover,
+.schedule_grid .nav_wrapper .schedule_nav li.active {
+  border-radius: 16px;
+}
+
+.schedule_grid .nav_wrapper .schedule_nav li {
+  background-color: #eaeaea;
+  transition: all .2s ease-out;
+}
+
+.schedule_grid .nav_wrapper .schedule_nav li + li {
+  margin-left: 8px;
+}
+
+.schedule_grid .nav_wrapper .schedule_nav li.active {
+  border: none;
+  background-color: $color-accent;
+  pointer-events: none;
+  span:first-child {
+    color: $color-base;
+  }
+}
+
+.schedule_grid .nav_wrapper .schedule_nav li:hover {
+  background-color: #d1d1d1;
+}
+
+.datatable thead {
+  border-top: solid 1px #dddddd;
+}

@@ -921,3 +921,26 @@ $dl-horizontal-offset:        $component-offset-horizontal !default;
 $dl-horizontal-breakpoint:    $grid-float-breakpoint !default;
 //** Horizontal line color.
 $hr-border:                   $gray-lighter !default;
+
+/////////////////////////////////////////////////////
+// 2022
+// --------------------------------------------------
+
+$color-base: #F0E7E0;
+$color-base-light: #F3EDE2;
+$color-main: #2C2C31;
+$color-main-light: #606069;
+$color-accent: #BF4545;
+$color-link: #3E6199;
+$color-link-hover: #2364C9;
+$color-light-gray: #D1BEAC;
+
+$brand-primary: $color-accent;
+$brand-info-alt:#4E6994;
+
+$headings-font-weight: 600;
+$font-family-sans-serif:  'Poppins', sans-serif;
+
+$navbar-default-link-active-bg: $color-accent;
+$navbar-default-link-hover-color: $color-accent;
+$navbar-default-link-active-bg: lighten($color-accent, 6.5%);

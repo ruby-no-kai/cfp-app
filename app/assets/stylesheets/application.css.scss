@@ -3,7 +3,6 @@
 @import "base/variables";
 @import "bootstrap";
 
-
 //Jquery-UI
 @import 'jquery-ui/core';
 @import 'jquery-ui/accordion';
@@ -73,3 +72,6 @@
 @import "modules/tooltips";
 @import "modules/widgets";
 @import "modules/teammates";
+
+// override for 2022
+@import "override/index";
