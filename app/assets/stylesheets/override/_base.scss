@@ -1,0 +1,35 @@
+body {
+  background-image: url('background.png');
+  font-family: 'Poppins', sans-serif;
+  background-repeat: repeat;
+  background-position: center top;
+}
+
+body[id*=staff_],
+body[id*=admin_]{
+  background-color: white;
+  background-image: none;
+  .main {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+}
+
+.page-footer .page-footer-inner {
+  border-top: solid 1px #f0e6e0;
+}
+
+input[type="text"],
+textarea,
+select,
+button.dropdown-toggle,
+.multiselect-container {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.well {
+  background-color: rgba(white, .6);
+  border: none;
+  box-shadow: none;
+  margin-top: 16px;
+  border: solid 1px #e3e3e3;
+}

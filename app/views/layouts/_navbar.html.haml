@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
       - if current_event
-        = link_to 'RubyKaigi Takeout 2021', event_path(current_event), class: 'navbar-brand'
+        = link_to 'RubyKaigi 2022', event_path(current_event), class: 'navbar-brand'
       - else
         = link_to "CFP App", events_path, class: 'navbar-brand'
 
@@ -56,7 +56,7 @@
 
       - else
         %ul.nav.navbar-nav.navbar-right
-          %li= link_to "Log in", new_user_session_path
+          %li.navbar-nav__login= link_to "Log in", new_user_session_path
 
 - if display_staff_event_subnav?
   = render partial: "layouts/nav/staff/event_subnav"
