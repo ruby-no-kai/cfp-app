@@ -97,15 +97,28 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: ENV['MAIL_HOST'] }
   config.action_mailer.default_options = { from: ENV['MAIL_FROM'] }
 
-  config.action_mailer.smtp_settings = {
-    address: ENV.fetch('SMTP_ADDRESS', 'smtp.sendgrid.net'),
-    port: ENV.fetch('SMTP_PORT', '587'),
-    authentication: :plain,
-    user_name: ENV.fetch('SMTP_USERNAME', 'apikey'),
-    password: ENV.fetch('SMTP_PASSWORD', ENV.fetch('SENDGRID_API_KEY', "")),
-    domain: ENV.fetch('SMTP_DOMAIN', 'heroku.com'),
-    enable_starttls_auto: true
-  }
+  if ENV['MAILGUN_SMTP_PASSWORD']
+    config.action_mailer.smtp_settings = {
+      :port           => ENV.fetch('SMTP_PORT', '587'),
+      :address        => ENV['MAILGUN_SMTP_SERVER'],
+      :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+      :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+      :domain         => ENV.fetch('SMTP_DOMAIN', 'heroku.com'),
+      :authentication => :plain,
+      enable_starttls_auto: true,
+    }
+    config.action_mailer.delivery_method = :smtp
+  else
+    config.action_mailer.smtp_settings = {
+      address: ENV.fetch('SMTP_ADDRESS', 'smtp.sendgrid.net'),
+      port: ENV.fetch('SMTP_PORT', '587'),
+      authentication: :plain,
+      user_name: ENV.fetch('SMTP_USERNAME', 'apikey'),
+      password: ENV.fetch('SMTP_PASSWORD', ENV.fetch('SENDGRID_API_KEY', "")),
+      domain: ENV.fetch('SMTP_DOMAIN', 'heroku.com'),
+      enable_starttls_auto: true
+    }
+  end
 
   config.exceptions_app = routes
 
