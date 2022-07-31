@@ -8,5 +8,5 @@
         class: "btn btn-danger btn-sm pull-right remove-speaker",
         data: { confirm: "This will remove #{speaker.name} from this proposal. Are you sure you want to do this?" }
 
-  = simple_format speaker.bio
+  = markdown speaker.bio
 %hr

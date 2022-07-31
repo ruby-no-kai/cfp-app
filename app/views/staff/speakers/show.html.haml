@@ -44,7 +44,7 @@
         %p= mail_to(@speaker.email)
       .program-session-item
         %h3.control-label Bio
-        %p= @speaker.bio
+        %p= markdown @speaker.bio
       - if @speaker.program_session
         .program-session-item
           %h3.control-label Program Session
