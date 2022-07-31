@@ -7,5 +7,5 @@
         class: "btn btn-danger btn-sm float-end remove-speaker",
         data: {turbo: true, turbo_method: :delete, turbo_confirm: "This will remove #{speaker.name} from this proposal. Are you sure you want to do this?"}
 
-  = simple_format speaker.bio
+  = markdown speaker.bio
 %hr
