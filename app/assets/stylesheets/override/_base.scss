@@ -1,8 +1,7 @@
 body {
-  background-image: url('background.png');
-  font-family: 'Poppins', sans-serif;
-  background-repeat: repeat;
-  background-position: center top;
+  font-family: $font-family-sans-serif;
+  background-color: $color-base;
+  color: $color-main;  
 }
 
 body[id*=staff_],

@@ -1,5 +1,5 @@
 .navbar-default {
-  background-color: #fcf9f6;
+  background-color: $color-base;
   border: none;
   box-shadow: 0 2px 1px rgba(black, .1);
 }
@@ -7,14 +7,15 @@
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
+  background-color: $color-main;
   border-radius: 4px;
 }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  background-color: rgba($color-accent, .1);
-  color: $color-accent;
+  background-color: rgba($color-base, .1);
+  color: $color-base;
 }
 
 .navbar-nav > li:not(:first-child) {
@@ -46,7 +47,9 @@
 }
 
 .navbar-brand {
-  font-family: inherit;
+  color: $color-main;
+  font-family: $font-family-sans-serif;
+  font-weight: bold;
 }
 
 .navbar-fixed-top.program-subnav,
@@ -54,11 +57,12 @@
   border: none;
   li.active {
     border-bottom: none;
+    color: $color-base;
   }
 }
 
 .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
-  background-color: $color-accent;
+  background-color: $color-base;
 }
 
 .subnavbar .subnavbar-inner {
