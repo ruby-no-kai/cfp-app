@@ -66,7 +66,7 @@ event. Note that the first line will automatically be styled as a bold title
 for the content.
 - Footer copyright: appears at the very bottom of the footer
 - Twitter handle: just the handle for the event without the '@' sign. Note that
-  this will also populate the `tiwtter:site` meta tag in the head.
+  this will also populate the `twitter:site` meta tag in the head.
 - Facebook url: full url to the facebook page for the event.
 - Instagram url: full url to the instagram page for the event.
 - Domains: a special field that deserves its own treatment [as follows](#domain-configuration).
@@ -319,4 +319,3 @@ careful since this cannot be undone.
 ## Sponsors
 
 ## Themes
-
