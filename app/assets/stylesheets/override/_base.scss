@@ -1,7 +1,7 @@
 body {
   font-family: $font-family-sans-serif;
   background-color: $color-base;
-  color: $color-main;  
+  color: $color-main;
 }
 
 body[id*=staff_],
@@ -9,7 +9,7 @@ body[id*=admin_]{
   background-color: white;
   background-image: none;
   .main {
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
   }
 }
 
@@ -22,7 +22,7 @@ textarea,
 select,
 button.dropdown-toggle,
 .multiselect-container {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
 }
 
 .well {
