@@ -96,11 +96,11 @@ module RubyKaigi
 
     %w(speakers lt_speakers sponsors schedule presentations lt_presentations).each do |name|
       define_method name do
-        File.read "#{@path}/data/year_2022/#{name}.yml"
+        File.read "#{@path}/data/year_2023/#{name}.yml"
       end
 
       define_method "#{name}=" do |content|
-        File.write "#{@path}/data/year_2022/#{name}.yml", content
+        File.write "#{@path}/data/year_2023/#{name}.yml", content
       end
 
       define_method "pull_requested_#{name}" do
