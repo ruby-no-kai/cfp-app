@@ -32,10 +32,10 @@ module RubyKaigi
       time_slots.to_h do |ts|
         ps = ts.program_session
         speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
-        lang = case ps.proposal.custom_fields['spoken language in your talk'] || 'JA'
-        when 'Japanese (If allowed, I can record the talk in both Japanese and English)'
+        lang = case ps.proposal.custom_fields['spoken language in your talk']&.downcase || 'ja'
+        when 'japanese (if allowed, i can record the talk in both japanese and english)'
           'EN & JA'
-        when 'JA', 'Ja', 'ja', 'JP', 'Jp', 'jp', 'JAPANESE', 'Japanese', 'japanese', '日本語', 'Maybe Japanese (not sure until fix the contents)'
+        when 'ja', 'jp', 'japanese', '日本語', 'maybe japanese (not sure until fix the contents)'
           'JA'
         else
           'EN'
