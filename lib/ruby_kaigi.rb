@@ -28,7 +28,7 @@ module RubyKaigi
     end
 
     def self.presentations(event)
-      time_slots = event.time_slots.joins([:room, program_session: :proposal]).includes(:room, program_session: [:proposal, {speakers: :user}]).order('time_slots.conference_day, time_slots.start_time, rooms.grid_position')
+      time_slots = event.time_slots.joins([:room, :program_session]).includes(:room, program_session: [:proposal, {speakers: :user}]).order('time_slots.conference_day, time_slots.start_time, rooms.grid_position')
       time_slots.to_h do |ts|
         ps = ts.program_session
         speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
