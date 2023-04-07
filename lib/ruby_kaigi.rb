@@ -33,7 +33,7 @@ module RubyKaigi
         ps = ts.program_session
         speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
         lang = case ps.proposal.custom_fields['spoken language in your talk']&.downcase || 'ja'
-        when 'japanese (if allowed, i can record the talk in both japanese and english)'
+        when 'japanese (if allowed, i can record the talk in both japanese and english)', 'en & ja'
           'EN & JA'
         when 'ja', 'jp', 'japanese', '日本語', 'maybe japanese (not sure until fix the contents)'
           'JA'
