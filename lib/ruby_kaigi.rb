@@ -32,14 +32,7 @@ module RubyKaigi
       time_slots.to_h do |ts|
         ps = ts.program_session
         speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
-        lang = case ps.proposal.custom_fields['spoken language in your talk']&.downcase || 'ja'
-        when 'japanese (if allowed, i can record the talk in both japanese and english)', 'en & ja'
-          'EN & JA'
-        when 'ja', 'jp', 'japanese', '日本語', 'maybe japanese (not sure until fix the contents)'
-          'JA'
-        else
-          'EN'
-        end
+        lang = spoken_language(ps.proposal.custom_fields['spoken language in your talk'])
         live_or_recorded = case ps.proposal.custom_fields['speaking at the venue or speaking remotely or submit pre-recorded video']
         when 'Prerecorded video', 'Submit pre-recorded video'
           'prerecorded'
@@ -73,6 +66,17 @@ module RubyKaigi
           end
         end
         [(day - 1).days.since(first_date).strftime('%b%d').downcase, {events: events}.deep_stringify_keys]
+      end
+    end
+
+    def self.spoken_language(lang = 'ja')
+      case lang&.downcase || 'ja'
+      when 'japanese (if allowed, i can record the talk in both japanese and english)', 'en & ja'
+        'EN & JA'
+      when 'ja', 'jp', 'japanese', '日本語', 'maybe japanese (not sure until fix the contents)'
+        'JA'
+      else
+        'EN'
       end
     end
   end
