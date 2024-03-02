@@ -87,7 +87,6 @@ module RubyKaigi
         `git clone https://#{ENV['GITHUB_TOKEN']}@github.com/ruby-no-kai/rubykaigi.org.git`
         Dir.chdir 'rubykaigi.org' do
           `git checkout master`
-          `git remote add rubykaigi-bot https://#{ENV['GITHUB_TOKEN']}@github.com/rubykaigi-bot/rubykaigi.org.git`
           `git pull --all`
         end
       end
@@ -121,9 +120,9 @@ module RubyKaigi
       Dir.chdir @path do
         `git checkout -b #{branch}`
         `git config user.name "RubyKaigi Bot" && git config user.email "amatsuda@rubykaigi.org"`
-        `git commit -am '#{title}' && git push -u rubykaigi-bot HEAD`
+        `git commit -am '#{title}' && git push -u origin HEAD`
         uri = URI 'https://api.github.com/repos/ruby-no-kai/rubykaigi.org/pulls'
-        Net::HTTP.post uri, {'title' => title, 'head' => "rubykaigi-bot:#{branch}", 'base' => 'master'}.to_json, {'Authorization' => "token #{ENV['GITHUB_TOKEN']}"}
+        Net::HTTP.post uri, {'title' => title, 'head' => branch, 'base' => 'master'}.to_json, {'Authorization' => "token #{ENV['GITHUB_TOKEN']}"}
       end
     end
   end
