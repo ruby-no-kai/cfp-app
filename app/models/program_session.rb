@@ -110,6 +110,10 @@ class ProgramSession < ApplicationRecord
     track.try(:name)
   end
 
+  def spoken_language
+    proposal&.spoken_language
+  end
+
   def group_name
     STATE_GROUPS[state]
   end
