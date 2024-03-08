@@ -163,6 +163,10 @@ class Proposal < ApplicationRecord
     proposal_data[:custom_fields] || {}
   end
 
+  def spoken_language
+    RubyKaigi::CfpApp.spoken_language(custom_fields['spoken language in your talk'])
+  end
+
   def confirm
     update(confirmed_at: Time.current)
     program_session.confirm if program_session.present?
