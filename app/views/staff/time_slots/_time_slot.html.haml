@@ -13,8 +13,6 @@
 
   %td= time_slot.room_name
 
-  %td= time_slot.display_track_name
-
   %td.actions
     = link_to 'Edit', edit_event_staff_schedule_time_slot_path(time_slot.event, time_slot), class: 'btn btn-primary btn-sm', data: {turbo: true, turbo_frame: 'time-slot-edit-dialog'}
 
