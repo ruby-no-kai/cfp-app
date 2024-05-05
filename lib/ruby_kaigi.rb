@@ -33,9 +33,19 @@ module RubyKaigi
         ps = ts.program_session
         speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
         lang = spoken_language(ps.proposal.custom_fields['spoken language in your talk'])
+        live_or_recorded = case ps.proposal.custom_fields['speaking at the venue or speaking remotely or submit pre-recorded video']
+        when 'Prerecorded video', 'Submit pre-recorded video'
+          'prerecorded'
+        when 'Maybe remote', 'Speaking remotely', 'Speak remotely'
+          'remote'
+        when 'I could submit pre-recorded video or speaking remotely. the later depends on the time of the presentation (i am located in toronto which has 13 hours difference with tokyo).'
+          'remote'
+        else
+          'venue'
+        end
 
         type = ps.session_format.name.sub('Regular Session', 'Presentation').downcase
-        [speakers.first, {title: ps.title, type: type, language: lang, description: ps.abstract.gsub("\r\n", "\n").chomp, speakers: speakers.map {|sp| {id: sp} }}.deep_stringify_keys]
+        [speakers.first, {title: ps.title, type: type, language: lang, live_or_recorded: live_or_recorded, description: ps.abstract.gsub("\r\n", "\n").chomp, speakers: speakers.map {|sp| {id: sp} }}.deep_stringify_keys]
       end
     end
 
