@@ -45,7 +45,7 @@ module RubyKaigi
         end
 
         type = ps.session_format.name.sub('Regular Session', 'Presentation').downcase
-        [speakers.first, {title: ps.title, type: type, language: lang, live_or_recorded: live_or_recorded, description: ps.abstract.gsub("\r\n", "\n").chomp, speakers: speakers.map {|sp| {id: sp} }}.deep_stringify_keys]
+        [speakers.first, {title: ps.title.strip, type: type, language: lang, live_or_recorded: live_or_recorded, description: ps.abstract.gsub("\r\n", "\n").chomp, speakers: speakers.map {|sp| {id: sp} }}.deep_stringify_keys]
       end
     end
 
