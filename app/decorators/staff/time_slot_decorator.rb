@@ -3,11 +3,11 @@ class Staff::TimeSlotDecorator < Draper::Decorator
   delegate_all
 
   def start_time
-    object.start_time.try(:to_fs, :time_p)
+    object.start_time.try(:to_fs, :hhmm)
   end
 
   def end_time
-    object.end_time.try(:to_fs, :time_p)
+    object.end_time.try(:to_fs, :hhmm)
   end
 
   def session_duration
