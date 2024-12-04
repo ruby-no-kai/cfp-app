@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_03_031006) do
+ActiveRecord::Schema.define(version: 2024_12_04_071209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 2023_02_03_031006) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float "average_rating"
+    t.string "spoken_language"
     t.index ["event_id"], name: "index_proposals_on_event_id"
     t.index ["session_format_id"], name: "index_proposals_on_session_format_id"
     t.index ["track_id"], name: "index_proposals_on_track_id"
