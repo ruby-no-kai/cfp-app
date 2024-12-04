@@ -153,6 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.float "average_rating"
+    t.string "spoken_language"
     t.index ["event_id"], name: "index_proposals_on_event_id"
     t.index ["session_format_id"], name: "index_proposals_on_session_format_id"
     t.index ["track_id"], name: "index_proposals_on_track_id"
