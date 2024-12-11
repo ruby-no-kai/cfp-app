@@ -15,6 +15,11 @@
   .markdown
     = markdown proposal.pitch
 
+.proposal-section
+  %h3.control-label Spoken Language
+  .markdown{ data: { 'field-id' => 'proposal_spoken_language' } }
+    =proposal.spoken_language
+
 - unless proposal.custom_fields.empty?
   - proposal.proposal_data[:custom_fields].select do |key,value|
     .proposal-section
