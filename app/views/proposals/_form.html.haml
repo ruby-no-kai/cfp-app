@@ -45,6 +45,9 @@
   = f.input :pitch, input_html: { class: 'watched', rows: 5 },
     hint: 'Explain why this talk should be considered and what makes you qualified to speak on the topic.'#, popover_icon: { content: pitch_tooltip }
 
+  = f.input :spoken_language, as: :radio_buttons, wrapper: 'vertical_radio_and_checkboxes', input_html: { class: 'watched' }, collection: ['EN', 'JA'],
+    hint: 'In which language would you speak?'
+
 - unless event.custom_fields.empty?
   - event.custom_fields.each do |custom_field|
     .form-group
