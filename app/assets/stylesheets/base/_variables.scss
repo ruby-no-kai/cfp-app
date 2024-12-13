@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Lexend:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap');
+
 $bootstrap-sass-asset-helper: false !default;
 //
 // Variables
@@ -81,9 +83,10 @@ $link-hover-decoration: underline !default;
 
 $font-family-sans-serif:  "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-serif:       Georgia, "Times New Roman", Times, serif !default;
+$font-family-lexend:  'Lexend', sans-serif, Helvetica, Arial, sans-serif !default;;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace !default;
-$font-family-base:        $font-family-sans-serif !default;
+$font-family-base:        $font-family-lexend !default;
 
 $font-size-base:          14px !default;
 $font-size-large:         ceil(($font-size-base * 1.25)) !default; // ~18px
@@ -939,6 +942,7 @@ $brand-info-alt:#4E6994;
 
 $headings-font-weight: 600;
 $font-family-sans-serif:  'Montserrat', sans-serif;
+$font-family-lexend:  'Lexend', sans-serif;
 
 $navbar-default-link-active-bg: $color-accent;
 $navbar-default-link-hover-color: $color-accent;
