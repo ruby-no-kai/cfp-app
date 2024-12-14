@@ -115,7 +115,7 @@ class Proposal < ApplicationRecord
   end
 
   def spoken_language
-    super || RubyKaigi::CfpApp.spoken_language(custom_fields['spoken language in your talk'])
+    super || RubyKaigi::CfpApp.spoken_language(custom_fields['spoken language in your talk'] || 'EN')
   end
 
   def update_state(new_state)
