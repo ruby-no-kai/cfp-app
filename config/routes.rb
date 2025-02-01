@@ -130,6 +130,14 @@ Rails.application.routes.draw do
       end
       resources :sponsors, only: [:index, :new, :create, :edit, :update, :destroy]
     end
+
+    resource 'rubykaigi', controller: 'rubykaigi', only: [] do
+      collection do
+        get :speakers
+        get :presentations
+        get :schedule
+      end
+    end
   end
 
   resources :image_uploads, only: :create
