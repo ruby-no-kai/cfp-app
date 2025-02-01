@@ -148,7 +148,7 @@ class ProgramSession < ApplicationRecord
   end
 
   def spoken_language
-    proposal.spoken_language
+    proposal&.spoken_language
   end
 
   def group_name
