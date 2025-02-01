@@ -106,6 +106,14 @@ Rails.application.routes.draw do
       resources :tracks, except: [:show]
       draw :staff_website  # => config/routes/staff_website.rb
     end
+
+    resource 'rubykaigi', controller: 'rubykaigi', only: [] do
+      collection do
+        get :speakers
+        get :presentations
+        get :schedule
+      end
+    end
   end
   resources :events, only: [:index]
 
