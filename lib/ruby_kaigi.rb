@@ -1,8 +1,4 @@
 module RubyKaigi
-  DISCUSSION_SESSIONS = [127, 172, 330].freeze  # committers, committers
-  LT_SESSIONS = [159, 233, 329].freeze  # LT
-  WORKSHOP_PROPOSALS = {794 => 'mrkn_workshop'}
-
   module CfpApp
     def self.speakers(event)
       keynotes, speakers = {}, {}
