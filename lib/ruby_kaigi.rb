@@ -28,7 +28,7 @@ module RubyKaigi
       time_slots.to_h do |ts|
         ps = ts.program_session
         speakers = ps.speakers.sort_by(&:created_at).map {|sp| sp.decorate.social_account }
-        lang = spoken_language(ps.proposal.custom_fields['spoken language in your talk'])
+        lang = ps.proposal.spoken_language
         live_or_recorded = case ps.proposal.custom_fields['speaking at the venue or speaking remotely or submit pre-recorded video']
         when 'Prerecorded video', 'Submit pre-recorded video'
           'prerecorded'
