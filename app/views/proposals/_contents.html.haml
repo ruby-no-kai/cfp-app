@@ -17,7 +17,7 @@
 
 .proposal-section
   %h3.control-label Spoken Language
-  .markdown{ data: { 'field-id' => 'proposal_spoken_language' } }
+  .markdown{ data: { 'field-name' => 'proposal[spoken_language]' } }
     =proposal.spoken_language
 
 - unless proposal.custom_fields.empty?
