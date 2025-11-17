@@ -1,59 +1,10 @@
-
 //== Colors
 //
-$color-base: #EBE0CE;
-$color-base-light: #F3EDE2;
-$color-main: #0B374D;
-$color-main-light: #545F64;
-$color-accent: #E14033;
-$color-link: #127CAE;
-$color-link-hover: #0092D8;
-$color-light-gray: #BFC6C9;
 $black: #222;
-$pink: #f3cadb;
-$lightpink: #fff8fb;
-$vividpink: #d84c85;
+$pink: #f3cadb;  // いる？
+$lightpink: #fff8fb;  // いる？
+$vividpink: #d84c85; // いる？
 
-// background
-$background-color: $color-base;
-
-// text
-$text-default: $color-main;
-$text-accent: $color-accent;
-$text-link: $color-link;
-$text-link-hover: $color-link-hover;
-
-$brand-primary:         $vividpink !default; //darken(#428bca, 6.5%) !default; // #337ab7
-
-$body-bg:               $background-color !default;
-$text-color:            $text-default !default;
-$link-color:            $text-link !default;
-$link-hover-color:      $text-link-hover !default;
-
-$font-family-lexend:  'Lexend', sans-serif, Helvetica, Arial, sans-serif !default;;
-$font-family-base:        $font-family-lexend !default;
-
-
-$navbar-default-color:             $text-default !default;
-$navbar-default-bg:                $background-color !default;
-$navbar-default-border:            darken($background-color, 10%) !default;
-
-
-$navbar-default-link-color:                $black !default;
-$navbar-default-link-hover-color:          $vividpink !default;
-
-
-$navbar-default-link-active-bg:            lighten($vividpink, 6.5%) !default;
-
-
-
-$blockquote-border-color:     $color-base !default;
-$page-header-border-color:    $color-base !default;
-
-
-/////////////////////////////////////////////////////
-// 2023
-// --------------------------------------------------
 $color-base: #F8F8F8;
 $color-base-light: #F3EDE2;
 $color-main: #333333;
@@ -66,10 +17,43 @@ $color-light-gray: #A8A6A9;
 $brand-primary: $color-accent;
 $brand-info-alt:#4E6994;
 
-$headings-font-weight: 600;
-$font-family-sans-serif:  'Montserrat', sans-serif;
-$font-family-lexend:  'Lexend', sans-serif;
+// background
+$background-color: $color-base;
 
-$navbar-default-link-active-bg: $color-accent;
+// text
+$text-default: $color-main;
+$text-accent: $color-accent;
+$text-link: $color-link;
+$text-link-hover: $color-link-hover;
+
+
+//== Scaffolding
+//
+$body-bg: $background-color !default;
+$text-color: $text-default !default;
+$link-color: $text-link !default;
+$link-hover-color: $text-link-hover !default;
+
+
+//== Typography
+//
+$font-family-sans-serif: 'Montserrat', sans-serif;
+$font-family-lexend: 'Lexend', sans-serif, Helvetica, Arial, sans-serif !default; // 2025 用なのであとで考える
+$font-family-lexend: 'Lexend', sans-serif;
+$font-family-base: $font-family-lexend !default;
+$headings-font-weight: 600;
+
+
+//== Navbar
+//
+$navbar-default-color: $text-default !default;
+$navbar-default-bg: $background-color !default;
+$navbar-default-border: darken($background-color, 10%) !default;
+$navbar-default-link-color: $black !default;
 $navbar-default-link-hover-color: $color-accent;
 $navbar-default-link-active-bg: lighten($color-accent, 6.5%);
+
+//== Type
+//
+$blockquote-border-color: $color-base !default;
+$page-header-border-color: $color-base !default;
