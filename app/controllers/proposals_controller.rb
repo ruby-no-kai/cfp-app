@@ -99,6 +99,9 @@ class ProposalsController < ApplicationController
       @proposal.update!(confirmed_at: Time.current)
       redirect_to [@event, @proposal], flash: {success: 'Thank you for confirming your participation'}
     elsif @proposal.speaker_update_and_notify(proposal_params)
+      if @proposal.program_session && ((@proposal.program_session.title != @proposal.title) || (@proposal.program_session.abstract != @proposal.abstract))
+        @proposal.program_session.update title: @proposal.title, abstract: @proposal.abstract
+      end
       redirect_to [@event, @proposal]
     else
       flash.now[:danger] = 'There was a problem saving your proposal.'
