@@ -4,6 +4,15 @@
   box-shadow: 0 2px 1px rgba(black, .1);
 }
 
+.navbar-default .navbar-nav li > a {
+  color: $color-main;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  background-color: rgba($color-main, .1);
+  color: $color-main;
+}
+
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
@@ -15,7 +24,7 @@
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
   background-color: rgba($color-base, .1);
-  color: $color-base;
+  color: $color-main;
 }
 
 .navbar-nav > li:not(:first-child) {
