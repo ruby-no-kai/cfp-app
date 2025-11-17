@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Lexend:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap');
+
+body {
+  font-family: $font-family-lexend;
+  // background-color: $color-base;
+  color: $color-main;
+}
+
+body[id*=staff_],
+body[id*=admin_]{
+  background-color: white;
+  background-image: none;
+  .main {
+    font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
+  }
+}
+
+.page-footer .page-footer-inner {
+  border-top: solid 1px #f0e6e0;
+}
+
+input[type="text"],
+textarea,
+select,
+button.dropdown-toggle,
+.multiselect-container {
+  font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+.well {
+  background-color: rgba(white, .6);
+  border: none;
+  box-shadow: none;
+  margin-top: 16px;
+  border: solid 1px #e3e3e3;
+}
