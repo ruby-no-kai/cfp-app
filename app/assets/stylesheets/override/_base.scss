@@ -12,6 +12,10 @@ body[id*=admin_]{
   }
 }
 
+h1, h2, h3 {
+  font-family: $font-family-outfit;
+}
+
 .page-footer .page-footer-inner {
   border-top: solid 1px #f0e6e0;
 }
