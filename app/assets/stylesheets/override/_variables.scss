@@ -15,7 +15,7 @@ $brand-primary: $color-accent;
 $brand-info-alt:#4E6994;
 
 // background
-$background-color: $color-base;
+$background-color: #F9EFEC;
 
 // text
 $text-default: $color-main;
@@ -26,7 +26,7 @@ $text-link-hover: $color-link-hover;
 
 //== Scaffolding
 //
-$body-bg: $background-color !default;
+$body-bg: $background-color;
 $text-color: $text-default !default;
 $link-color: $text-link !default;
 $link-hover-color: $text-link-hover !default;
