@@ -35,9 +35,7 @@ $link-hover-color: $text-link-hover !default;
 //== Typography
 //
 $font-family-sans-serif: 'Montserrat', sans-serif;
-$font-family-lexend: 'Lexend', sans-serif, Helvetica, Arial, sans-serif !default; // 2025 用なのであとで考える
-$font-family-lexend: 'Lexend', sans-serif;
-$font-family-base: $font-family-lexend !default;
+$font-family-base: $font-sans-serif !default;
 $headings-font-weight: 600;
 
 
