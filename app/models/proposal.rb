@@ -339,19 +339,20 @@ end
 #  state                 :string           default("submitted")
 #  uuid                  :string
 #  title                 :string
-#  session_format_id     :integer
-#  track_id              :integer
 #  abstract              :text
 #  details               :text
 #  pitch                 :text
 #  last_change           :text
 #  confirmation_notes    :text
-#  proposal_data         :text
-#  updated_by_speaker_at :datetime
 #  confirmed_at          :datetime
 #  created_at            :datetime
 #  updated_at            :datetime
+#  updated_by_speaker_at :datetime
+#  proposal_data         :text
+#  session_format_id     :integer
+#  track_id              :integer
 #  average_rating        :float
+#  spoken_language       :string
 #
 # Indexes
 #

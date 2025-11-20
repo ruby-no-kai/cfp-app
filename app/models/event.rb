@@ -228,25 +228,24 @@ end
 # Table name: events
 #
 #  id                          :integer          not null, primary key
-#  archived                    :boolean          default(FALSE)
-#  closes_at                   :datetime
-#  contact_email               :string
-#  created_at                  :datetime
-#  custom_fields               :text
-#  end_date                    :datetime
-#  guidelines                  :text
-#  info                        :text
-#  name                        :string
+#  name                        :string(255)
+#  slug                        :string(255)
+#  url                         :string(255)
+#  contact_email               :string(255)
+#  state                       :string(255)      default("closed")
 #  opens_at                    :datetime
+#  closes_at                   :datetime
+#  start_date                  :datetime
+#  end_date                    :datetime
 #  proposal_tags               :text
 #  review_tags                 :text
-#  settings                    :text
-#  slug                        :string
+#  guidelines                  :text
+#  policies                    :text
 #  speaker_notification_emails :text
-#  start_date                  :datetime
-#  state                       :string           default("draft")
+#  created_at                  :datetime
 #  updated_at                  :datetime
-#  url                         :string
+#  archived                    :boolean          default(FALSE)
+#  custom_fields               :text
 #
 # Indexes
 #

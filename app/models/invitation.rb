@@ -35,15 +35,17 @@ end
 #
 #  id          :integer          not null, primary key
 #  proposal_id :integer
-#  user_id     :integer
-#  email       :string
-#  state       :string           default("pending")
-#  slug        :string
+#  person_id   :integer
+#  email       :string(255)
+#  state       :string(255)      default("pending")
+#  slug        :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  user_id     :integer
 #
 # Indexes
 #
+#  index_invitations_on_person_id              (person_id)
 #  index_invitations_on_proposal_id            (proposal_id)
 #  index_invitations_on_proposal_id_and_email  (proposal_id,email) UNIQUE
 #  index_invitations_on_slug                   (slug) UNIQUE
