@@ -137,6 +137,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_02_15_111232) do
 
   create_table "proposals", force: :cascade do |t|
     t.text "abstract"
+    t.float "average_rating"
     t.text "confirmation_notes"
     t.datetime "confirmed_at", precision: nil
     t.datetime "created_at", precision: nil
@@ -146,6 +147,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_02_15_111232) do
     t.text "pitch"
     t.text "proposal_data"
     t.bigint "session_format_id"
+    t.string "spoken_language"
     t.string "state", default: "submitted"
     t.string "title"
     t.bigint "track_id"
@@ -182,14 +184,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_02_15_111232) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.string "provider"
-    t.string "uid"
-    t.integer "user_id"
-    t.string "uname"
     t.string "account_name"
+    t.datetime "created_at", precision: nil
+    t.string "provider"
     t.string "uemail"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "uid"
+    t.string "uname"
+    t.datetime "updated_at", precision: nil
+    t.integer "user_id"
     t.index ["user_id"], name: "index_services_on_user_id"
   end
 
@@ -217,11 +219,15 @@ ActiveRecord::Schema[8.1].define(version: 2025_02_15_111232) do
   end
 
   create_table "speakers", force: :cascade do |t|
+    t.string "age_range"
     t.text "bio"
     t.datetime "created_at", precision: nil
+    t.string "ethnicity"
     t.bigint "event_id"
+    t.boolean "first_time_speaker"
     t.text "info"
     t.bigint "program_session_id"
+    t.string "pronouns"
     t.bigint "proposal_id"
     t.string "speaker_email"
     t.string "speaker_name"
@@ -318,6 +324,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_02_15_111232) do
     t.inet "current_sign_in_ip"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "github_account"
+    t.string "github_uid"
     t.datetime "last_sign_in_at", precision: nil
     t.inet "last_sign_in_ip"
     t.string "name"
@@ -326,6 +334,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_02_15_111232) do
     t.datetime "reset_password_sent_at", precision: nil
     t.string "reset_password_token"
     t.integer "sign_in_count", default: 0, null: false
+    t.string "twitter_account"
+    t.string "twitter_uid"
     t.string "uid"
     t.string "unconfirmed_email"
     t.datetime "updated_at", precision: nil
