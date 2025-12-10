@@ -53,7 +53,11 @@ SimpleForm.setup do |config|
     b.use :placeholder
     b.optional :tooltip
     b.optional :popover_icon
-    b.use :label_input
+    b.use :label, class: 'control-label'
+
+    b.wrapper tag: 'div' do |ba|
+      ba.use :input
+    end
 
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
