@@ -34,6 +34,7 @@
   = f.input :pitch, input_html: { class: 'watched', rows: 5 }, hint: 'Explain why this talk should be considered and what makes you qualified to speak on the topic.'
 
   = f.input :spoken_language, as: :radio_buttons, wrapper: 'vertical_radio_and_checkboxes', input_html: { class: 'watched' }, collection: ['EN', 'JA'],
+    collection_wrapper_tag: nil, item_wrapper_tag: :div, item_wrapper_class: 'radio',
     hint: 'In which language would you speak?'
 
 - unless event.custom_fields.empty?
