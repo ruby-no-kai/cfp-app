@@ -12,15 +12,15 @@ end
 # Table name: rooms
 #
 #  id            :integer          not null, primary key
-#  event_id      :integer
-#  name          :string
-#  room_number   :string
-#  level         :string
-#  address       :string
+#  name          :string(255)
+#  room_number   :string(255)
+#  level         :string(255)
+#  address       :string(255)
 #  capacity      :integer
-#  grid_position :integer
+#  event_id      :integer
 #  created_at    :datetime
 #  updated_at    :datetime
+#  grid_position :integer
 #
 # Indexes
 #

@@ -47,14 +47,16 @@ end
 # Table name: notifications
 #
 #  id          :integer          not null, primary key
-#  user_id     :integer
-#  message     :string
-#  target_path :string
+#  person_id   :integer
+#  message     :string(255)
 #  read_at     :datetime
+#  target_path :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  user_id     :integer
 #
 # Indexes
 #
-#  index_notifications_on_user_id  (user_id)
+#  index_notifications_on_person_id  (person_id)
+#  index_notifications_on_user_id    (user_id)
 #
