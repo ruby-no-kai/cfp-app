@@ -36,16 +36,17 @@ end
 # Table name: speakers
 #
 #  id                 :integer          not null, primary key
+#  proposal_id        :integer
+#  person_id          :integer
+#  bio                :text
+#  created_at         :datetime
+#  updated_at         :datetime
 #  user_id            :integer
 #  event_id           :integer
-#  proposal_id        :integer
 #  program_session_id :integer
 #  speaker_name       :string
 #  speaker_email      :string
-#  bio                :text
 #  info               :text
-#  created_at         :datetime
-#  updated_at         :datetime
 #  age_range          :string
 #  ethnicity          :string
 #  first_time_speaker :boolean
@@ -54,6 +55,7 @@ end
 # Indexes
 #
 #  index_speakers_on_event_id            (event_id)
+#  index_speakers_on_person_id           (person_id)
 #  index_speakers_on_program_session_id  (program_session_id)
 #  index_speakers_on_proposal_id         (proposal_id)
 #  index_speakers_on_user_id             (user_id)
