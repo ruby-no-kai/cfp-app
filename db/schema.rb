@@ -13,6 +13,7 @@
 ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
@@ -42,38 +43,39 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", id: :serial, force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", precision: nil
     t.integer "parent_id"
-    t.bigint "proposal_id"
-    t.string "type"
+    t.integer "person_id"
+    t.integer "proposal_id"
+    t.string "type", limit: 255
     t.datetime "updated_at", precision: nil
-    t.bigint "user_id"
+    t.integer "user_id"
+    t.index ["person_id"], name: "index_comments_on_person_id"
     t.index ["proposal_id"], name: "index_comments_on_proposal_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :serial, force: :cascade do |t|
     t.boolean "archived", default: false
     t.datetime "closes_at", precision: nil
-    t.string "contact_email"
+    t.string "contact_email", limit: 255
     t.datetime "created_at", precision: nil
     t.text "custom_fields"
     t.datetime "end_date", precision: nil
     t.text "guidelines"
-    t.text "info"
-    t.string "name"
+    t.string "name", limit: 255
     t.datetime "opens_at", precision: nil
+    t.text "policies"
     t.text "proposal_tags"
     t.text "review_tags"
-    t.text "settings"
-    t.string "slug"
+    t.string "slug", limit: 255
     t.text "speaker_notification_emails"
     t.datetime "start_date", precision: nil
-    t.string "state", default: "draft"
+    t.string "state", limit: 255, default: "closed"
     t.datetime "updated_at", precision: nil
-    t.string "url"
+    t.string "url", limit: 255
     t.index ["slug"], name: "index_events_on_slug"
   end
 
@@ -88,27 +90,31 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
-  create_table "invitations", force: :cascade do |t|
+  create_table "invitations", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil
-    t.string "email"
-    t.bigint "proposal_id"
-    t.string "slug"
-    t.string "state", default: "pending"
+    t.string "email", limit: 255
+    t.integer "person_id"
+    t.integer "proposal_id"
+    t.string "slug", limit: 255
+    t.string "state", limit: 255, default: "pending"
     t.datetime "updated_at", precision: nil
-    t.bigint "user_id"
+    t.integer "user_id"
+    t.index ["person_id"], name: "index_invitations_on_person_id"
     t.index ["proposal_id", "email"], name: "index_invitations_on_proposal_id_and_email", unique: true
     t.index ["proposal_id"], name: "index_invitations_on_proposal_id"
     t.index ["slug"], name: "index_invitations_on_slug", unique: true
     t.index ["user_id"], name: "index_invitations_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil
-    t.string "message"
+    t.string "message", limit: 255
+    t.integer "person_id"
     t.datetime "read_at", precision: nil
-    t.string "target_path"
+    t.string "target_path", limit: 255
     t.datetime "updated_at", precision: nil
-    t.bigint "user_id"
+    t.integer "user_id"
+    t.index ["person_id"], name: "index_notifications_on_person_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
@@ -146,7 +152,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.index ["track_id"], name: "index_program_sessions_on_track_id"
   end
 
-  create_table "proposals", force: :cascade do |t|
+  create_table "proposals", id: :serial, force: :cascade do |t|
     t.text "abstract"
     t.float "average_rating"
     t.text "confirmation_notes"
@@ -171,25 +177,27 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.index ["uuid"], name: "index_proposals_on_uuid", unique: true
   end
 
-  create_table "ratings", force: :cascade do |t|
+  create_table "ratings", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil
-    t.bigint "proposal_id"
+    t.integer "person_id"
+    t.integer "proposal_id"
     t.integer "score"
     t.datetime "updated_at", precision: nil
-    t.bigint "user_id"
+    t.integer "user_id"
+    t.index ["person_id"], name: "index_ratings_on_person_id"
     t.index ["proposal_id"], name: "index_ratings_on_proposal_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.string "address"
+  create_table "rooms", id: :serial, force: :cascade do |t|
+    t.string "address", limit: 255
     t.integer "capacity"
     t.datetime "created_at", precision: nil
-    t.bigint "event_id"
+    t.integer "event_id"
     t.integer "grid_position"
-    t.string "level"
-    t.string "name"
-    t.string "room_number"
+    t.string "level", limit: 255
+    t.string "name", limit: 255
+    t.string "room_number", limit: 255
     t.datetime "updated_at", precision: nil
     t.index ["event_id"], name: "index_rooms_on_event_id"
   end
@@ -229,7 +237,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.index ["event_id"], name: "index_session_formats_on_event_id"
   end
 
-  create_table "speakers", force: :cascade do |t|
+  create_table "speakers", id: :serial, force: :cascade do |t|
     t.string "age_range"
     t.text "bio"
     t.datetime "created_at", precision: nil
@@ -237,6 +245,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.bigint "event_id"
     t.boolean "first_time_speaker"
     t.text "info"
+    t.bigint "person_id"
     t.bigint "program_session_id"
     t.string "pronouns"
     t.bigint "proposal_id"
@@ -245,6 +254,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.datetime "updated_at", precision: nil
     t.bigint "user_id"
     t.index ["event_id"], name: "index_speakers_on_event_id"
+    t.index ["person_id"], name: "index_speakers_on_person_id"
     t.index ["program_session_id"], name: "index_speakers_on_program_session_id"
     t.index ["proposal_id"], name: "index_speakers_on_proposal_id"
     t.index ["user_id"], name: "index_speakers_on_user_id"
@@ -265,16 +275,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.index ["event_id"], name: "index_sponsors_on_event_id"
   end
 
-  create_table "taggings", force: :cascade do |t|
+  create_table "taggings", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil
     t.boolean "internal", default: false
-    t.bigint "proposal_id"
-    t.string "tag"
+    t.integer "proposal_id"
+    t.string "tag", limit: 255
     t.datetime "updated_at", precision: nil
     t.index ["proposal_id"], name: "index_taggings_on_proposal_id"
   end
 
-  create_table "teammates", force: :cascade do |t|
+  create_table "teammates", id: :serial, force: :cascade do |t|
     t.datetime "accepted_at", precision: nil
     t.datetime "created_at", precision: nil
     t.datetime "declined_at", precision: nil
@@ -314,17 +324,17 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_22_163947) do
     t.index ["track_id"], name: "index_time_slots_on_track_id"
   end
 
-  create_table "tracks", force: :cascade do |t|
+  create_table "tracks", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil
-    t.string "description", limit: 250
-    t.bigint "event_id"
+    t.string "description"
+    t.integer "event_id"
     t.text "guidelines"
-    t.string "name"
+    t.text "name"
     t.datetime "updated_at", precision: nil
     t.index ["event_id"], name: "index_tracks_on_event_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.boolean "admin", default: false
     t.text "bio"
     t.datetime "confirmation_sent_at", precision: nil
