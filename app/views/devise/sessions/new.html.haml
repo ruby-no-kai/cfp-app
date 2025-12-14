@@ -6,7 +6,7 @@
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
 
     .form-inputs
-      .col-sm-5.col-centered
+      .col-sm-10.col-md-7.col-lg-6.col-centered
         .card
           .card-body
             = f.error_notification
@@ -21,7 +21,7 @@
     .form-group= render "devise/shared/links"
 
 - unless Rails.env.production?
-  .col-sm-5.col-centered.mt-3
+  .col-sm-10.col-md-7.col-lg-6.col-centered.mt-3
     .card
       .card-body
         .form-group
