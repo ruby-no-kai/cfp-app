@@ -1,0 +1,8 @@
+/* Override variables for RubyKaigi fork */
+:root {
+  --body-bg: white;
+  --gray-lightest: hsl(from var(--black) h s calc(l + 97));
+
+  --font-family-sans-serif: 'Montserrat', sans-serif;
+  --font-family-outfit: 'Outfit', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
