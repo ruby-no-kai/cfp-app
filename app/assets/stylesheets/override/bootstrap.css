@@ -1,0 +1,56 @@
+/* Override navbar styles for RubyKaigi fork */
+.navbar-default {
+  background-color: var(--gray-lightest);
+  border: none;
+  box-shadow: 0 2px 1px var(--gray-light);
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav .nav-link {
+  color: var(--text-color);
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:active,
+.navbar-default .navbar-nav .nav-link:hover,
+.navbar-default .navbar-nav .nav-link:focus,
+.navbar-default .navbar-nav .nav-link:active {
+  color: var(--gray-light);
+}
+
+.navbar-default .navbar-brand {
+  font-family: var(--font-family-sans-serif);
+  font-weight: bold;
+  padding-left: 0;
+}
+
+@media (min-width: 992px) {
+  .navbar-default .navbar-nav .nav-item.active .nav-link,
+  .navbar-default .navbar-nav .nav-item .nav-link.active {
+    background-color: var(--gray-dark) !important;
+    color: white;
+    border-radius: 4px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 7px;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-default .navbar-nav .nav-item.active .nav-link,
+  .navbar-default .navbar-nav .nav-item .nav-link.active {
+    background-color: transparent;
+    color: var(--text-color);
+  }
+}
+
+.navbar-default .navbar-toggler{
+  border-color: var(--gray);
+  background-color: var(--gray);
+  color: var(--text-color);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 2px;
+}

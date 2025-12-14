@@ -35,4 +35,6 @@
 @import "./modules/widgets.css";
 @import "./modules/staff-website-page.css";
 
+@import "./override/index.css";
+
 @import "tailwindcss/utilities";
