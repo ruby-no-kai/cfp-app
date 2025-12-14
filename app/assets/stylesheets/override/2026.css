@@ -1,0 +1,9 @@
+/* For RubyKaigi 2026 */
+:root {
+  --body-bg: #F9EFEC;
+  --text-color: #000;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-family-outfit);
+}
