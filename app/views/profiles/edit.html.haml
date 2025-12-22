@@ -83,8 +83,8 @@
         .mb-3
           = image_tag("https://www.gravatar.com/avatar/#{current_user.gravatar_hash}?s=64&d=mp", alt: 'Profile icon')
         %p
-          Add or change your profile icon image by visiting
-          = link_to('Gravatar', 'https://en.gravatar.com/connect/', target: "_blank")
+          This image will be shown on the RubyKaigi website once your proposal is accepted and your talk is scheduled. You can add or change your profile icon image by visiting
+          = link_to('Gravatar', 'https://en.gravatar.com/connect/', target: '_blank') << '.'.html_safe
 
     - if current_user.teammates.loaded? ? current_user.teammates.any? : current_user.teammates.exists?
       .widget
