@@ -132,7 +132,7 @@ GEM
     childprocess (5.1.0)
       logger (~> 1.5)
     concurrent-ruby (1.3.6)
-    connection_pool (3.0.2)
+    connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
@@ -471,6 +471,7 @@ DEPENDENCIES
   bootsnap (~> 1.23)
   capybara (~> 3.37)
   chartkick
+  connection_pool (~> 2.4.1)
   cssbundling-rails
   csv
   debug

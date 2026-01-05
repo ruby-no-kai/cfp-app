@@ -44,6 +44,7 @@ gem 'simple_form'
 gem 'image_processing', '~> 1.14'
 
 gem 'redis'
+gem 'connection_pool', '~> 2.4.1'
 
 gem 'diffy'
 gem 'paper_trail'
