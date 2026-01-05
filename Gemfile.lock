@@ -515,7 +515,7 @@ DEPENDENCIES
   turbo-rails
 
 RUBY VERSION
-  ruby 4.0.2
+  ruby 3.4.8
 
 BUNDLED WITH
   4.0.9
