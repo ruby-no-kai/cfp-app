@@ -41,6 +41,8 @@ gem 'redcarpet', '~> 3.6'
 gem 'simple_form'
 gem 'image_processing', '~> 2.2'
 
+gem 'redis'
+
 gem 'diffy'
 gem 'paper_trail'
 

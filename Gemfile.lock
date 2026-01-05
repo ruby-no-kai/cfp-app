@@ -391,6 +391,10 @@ GEM
       rbs (>= 4.0.0)
       tsort
     redcarpet (3.6.1)
+    redis (5.4.1)
+      redis-client (>= 0.22.0)
+    redis-client (0.26.2)
+      connection_pool
     regexp_parser (2.7.0)
     reline (0.7.0)
       io-console (~> 0.5)
@@ -513,6 +517,7 @@ DEPENDENCIES
   rack-timeout (~> 0.7)
   rails (~> 8.1.4)
   redcarpet (~> 3.6)
+  redis
   rspec
   rspec-rails
   selenium-webdriver
