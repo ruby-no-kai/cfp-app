@@ -503,6 +503,7 @@ DEPENDENCIES
   launchy
   letter_opener_web
   matrix
+  mini_portile2
   mission_control-jobs
   nokogiri
   omniauth-github
