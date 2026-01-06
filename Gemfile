@@ -50,8 +50,6 @@ gem 'connection_pool', '~> 2.4.1'
 gem 'diffy'
 gem 'paper_trail'
 
-gem 'sendgrid-ruby'
-
 group :production do
   gem 'aws-sdk-s3'
   gem 'rack-timeout', '~> 0.7'

@@ -407,7 +407,6 @@ GEM
       ffi (~> 1.12)
       logger
     ruby2_keywords (0.0.5)
-    ruby_http_client (3.5.5)
     rubyzip (3.2.2)
     securerandom (0.4.1)
     selenium-webdriver (4.41.0)
@@ -416,8 +415,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    sendgrid-ruby (6.7.0)
-      ruby_http_client (~> 3.4)
     simple_form (5.4.1)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
@@ -509,7 +506,6 @@ DEPENDENCIES
   rspec
   rspec-rails
   selenium-webdriver
-  sendgrid-ruby
   simple_form
   solid_queue
   stateful_enum
