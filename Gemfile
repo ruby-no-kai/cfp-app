@@ -35,7 +35,6 @@ gem 'active_model_serializers', '~> 0.10.16'
 gem 'bootsnap', '~> 1.23', require: false
 gem 'chartkick'
 gem 'draper', '~> 4.0'
-gem 'fastly'
 gem 'groupdate'
 gem 'nokogiri'
 gem 'mini_portile2'

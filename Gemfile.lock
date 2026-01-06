@@ -165,9 +165,6 @@ GEM
     erubi (1.13.1)
     et-orbi (1.4.0)
       tzinfo
-    ethon (0.18.0)
-      ffi (>= 1.15.0)
-      logger
     factory_bot (6.5.5)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
@@ -179,8 +176,6 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
-    fastly (16.1.0)
-      typhoeus (~> 1.0, >= 1.0.1)
     ffi (1.17.4)
     foreman (0.90.0)
       thor (~> 1.4)
@@ -438,8 +433,6 @@ GEM
     turbo-rails (2.0.23)
       actionpack (>= 7.1.0)
       railties (>= 7.1.0)
-    typhoeus (1.6.0)
-      ethon (>= 0.18.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uri (1.1.1)
@@ -478,7 +471,6 @@ DEPENDENCIES
   draper (~> 4.0)
   factory_bot_rails
   faker
-  fastly
   foreman
   groupdate
   haml-rails
