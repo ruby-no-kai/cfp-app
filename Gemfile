@@ -47,8 +47,6 @@ gem 'redis'
 gem 'diffy'
 gem 'paper_trail'
 
-gem 'sendgrid-ruby'
-
 group :production do
   gem 'aws-sdk-s3'
   gem 'rack-timeout', '~> 0.7'

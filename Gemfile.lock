@@ -423,7 +423,6 @@ GEM
       rspec-support (>= 3.13.0, < 5.0.0)
     rspec-support (3.13.7)
     ruby2_keywords (0.0.5)
-    ruby_http_client (3.5.5)
     rubyzip (3.7.0)
     securerandom (0.4.1)
     selenium-webdriver (4.52.0)
@@ -431,8 +430,6 @@ GEM
       logger (~> 1.4)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    sendgrid-ruby (6.7.0)
-      ruby_http_client (~> 3.4)
     simple_form (5.4.1)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
@@ -522,7 +519,6 @@ DEPENDENCIES
   rspec
   rspec-rails
   selenium-webdriver
-  sendgrid-ruby
   simple_form
   solid_queue
   stateful_enum
