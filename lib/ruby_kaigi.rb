@@ -2,7 +2,7 @@ module RubyKaigi
   module CfpApp
     def self.speakers(event)
       keynotes, speakers = {}, {}
-      Speaker.joins(:proposal).includes(:user, program_session: [:session_format, :time_slot]).merge(event.proposals.accepted.confirmed).order('time_slots.conference_day, time_slots.start_time').decorate.each do |sp|
+      Speaker.joins(:proposal).includes(:user, program_session: [:session_format, :time_slot]).merge(event.proposals.accepted).order('time_slots.conference_day, time_slots.start_time').decorate.each do |sp|
         user = sp.user
         id = sp.social_account
         bio = if sp.bio.present? && (sp.bio != 'N/A')
