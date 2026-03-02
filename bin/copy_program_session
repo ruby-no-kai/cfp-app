@@ -1,0 +1,20 @@
+raise 'Specify an Event Slug' unless event_slug = ENV['EVENT_SLUG']
+raise 'Specify a ProgramSession ID' unless program_session_id = ARGV[0]
+
+ps_old = ProgramSession.find program_session_id
+pr_old = ps_old.proposal
+ev = Event.find_by slug: event_slug
+now = Time.current
+
+sf = ev.session_formats.where(name: pr_old.session_format.name).sole
+
+ActiveRecord::Base.transaction do
+  pr = Proposal.create! event: ev, state: 'accepted', title: pr_old.title, abstract: pr_old.abstract, details: pr_old.details, pitch: pr_old.pitch, confirmed_at: now, updated_by_speaker_at: now, session_format: sf, spoken_language: pr_old.spoken_language
+  p pr
+  pr_old.speakers.each do |sp|
+    p pr.speakers.create! bio: sp.bio, user_id: sp.user_id, event: ev, speaker_name: sp.speaker_name, speaker_email: sp.speaker_email
+  end
+
+  ps = ProgramSession.create_from_proposal pr
+  p ps
+end
