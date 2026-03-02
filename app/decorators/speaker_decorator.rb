@@ -8,11 +8,17 @@ class SpeakerDecorator < Draper::Decorator
   end
 
   def github_account
-    user.identities.where(provider: 'github').pick(:account_name).presence if user
+    if user
+      user.identities.where(provider: 'github').pick(:account_name).presence || user&.github_account.presence || (user&.github_uid.presence && github_uid_to_uname(user.github_uid))
+    end
+
   end
 
   def twitter_account
-    user.identities.where(provider: 'twitter').pick(:account_name).presence if user
+    if user
+      user.identities.where(provider: 'twitter').pick(:account_name).presence || user&.twitter_account.presence || (user&.twitter_uid.presence && twitter_uid_to_uname(user.twitter_uid))
+    end
+
   end
 
   def social_account
@@ -27,11 +33,26 @@ class SpeakerDecorator < Draper::Decorator
     end
   end
 
+  private def github_uid_to_uname(uid)
+    api_uri = URI.parse "https://api.github.com/user/#{uid}"
+    Rails.cache.fetch api_uri do
+      JSON.parse(Net::HTTP.get(api_uri))['login']
+    end
+  end
+
   def link_to_twitter
     if (uname = twitter_account)
       h.link_to "@#{uname}", "https://twitter.com/#{uname}", target: '_blank'
     else
       'none'
+    end
+  end
+
+  private def twitter_uid_to_uname(uid)
+    twitter_uri = "https://twitter.com/intent/user?user_id=#{uid}"
+    Rails.cache.fetch twitter_uri do
+      html = Net::HTTP.get URI.parse(twitter_uri)
+      html.scan(/<span class="nickname">@(.*)<\/span>/).first&.first
     end
   end
 end
