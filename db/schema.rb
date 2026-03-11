@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_06_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_11_173726) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -199,7 +199,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_06_000001) do
     t.string "name", limit: 255
     t.string "room_number", limit: 255
     t.datetime "updated_at", precision: nil
-    t.index ["event_id"], name: "index_rooms_on_event_id"
+    t.index ["event_id", "grid_position"], name: "index_rooms_on_event_id_and_grid_position"
   end
 
   create_table "services", force: :cascade do |t|
