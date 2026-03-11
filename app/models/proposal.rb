@@ -211,13 +211,13 @@ class Proposal < ApplicationRecord
 
   def average_rating
     return self[:average_rating] if self[:average_rating]
-    return nil if ratings.empty?
+    return nil if ratings.records.empty?
 
     ratings.map(&:score).inject(:+).to_f / ratings.size
   end
 
   def standard_deviation
-    unless ratings.empty?
+    unless ratings.records.empty?
       scores = ratings.map(&:score)
 
       squared_reducted_total = 0.0
