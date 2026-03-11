@@ -45,6 +45,8 @@ gem 'redis'
 gem 'diffy'
 gem 'paper_trail'
 
+gem 'skylight'
+
 group :production do
   gem 'rack-timeout', '~> 0.7'
 end
