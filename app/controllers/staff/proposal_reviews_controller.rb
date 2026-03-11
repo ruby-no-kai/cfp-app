@@ -28,7 +28,6 @@ class Staff::ProposalReviewsController < Staff::ApplicationController
     set_title(@proposal.title)
 
     rating = current_user.rating_for(@proposal)
-    rating.touch unless rating.new_record?
 
     current_user.notifications.mark_as_read_for_proposal(request.url)
     track_and_format_edit = current_user.reviewer_for_event?(current_event)
