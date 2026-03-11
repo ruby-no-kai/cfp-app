@@ -382,6 +382,8 @@ GEM
     simple_form (5.4.1)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
+    skylight (7.0.0)
+      activesupport (>= 7.1.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -466,6 +468,7 @@ DEPENDENCIES
   rspec-rails
   selenium-webdriver
   simple_form
+  skylight
   solid_queue
   stateful_enum
   turbo-rails

@@ -48,6 +48,8 @@ gem 'connection_pool', '~> 2.4.1'
 gem 'diffy'
 gem 'paper_trail'
 
+gem 'skylight'
+
 group :production do
   gem 'rack-timeout', '~> 0.7'
 end
