@@ -32,6 +32,16 @@ class Staff::ProgramSessionDecorator < Draper::Decorator
     STATE_CLASSES[state] || 'label-default'
   end
 
+  SPOKEN_LANGUAGE_COLORS = {
+    'EN' => '#3b82f6',
+    'JA' => '#ef4444',
+    'EN & JA' => '#8b5cf6',
+  }.freeze
+
+  def spoken_language_color
+    SPOKEN_LANGUAGE_COLORS[spoken_language]
+  end
+
   def track_name
     object.track_name || Track::NO_TRACK
   end

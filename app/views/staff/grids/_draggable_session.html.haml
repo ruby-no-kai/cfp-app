@@ -1,6 +1,8 @@
 .draggable-session-card{data: ps.ps_data.merge({draggable_sessions_target: 'session'})}
   .track
     %span= truncate(ps.track_name, length: 18)
+  - if ps.spoken_language.present?
+    %span.spoken-language{style: "background-color: #{ps.spoken_language_color}"}= ps.spoken_language
   .session-card-body
     %p.card-title= truncate(ps.title, length: 40, separator: ' ')
     %p.card-speakers= truncate(ps.display_speakers, length: 40, separator: ' ')

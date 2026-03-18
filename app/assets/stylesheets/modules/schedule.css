@@ -229,6 +229,20 @@ body .custom-session-card {
   cursor: pointer;
 }
 
+.draggable-session-card .spoken-language {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: white;
+  z-index: 11;
+}
+
 /* in the unscheduled sessions widget */
 .unscheduled-sessions-widget .draggable-session-card {
   opacity: 1;
