@@ -41,7 +41,6 @@ gem 'mini_portile2'
 gem 'pundit'
 gem 'redcarpet', '~> 3.6'
 gem 'simple_form'
-gem 'image_processing', '~> 1.14'
 
 gem 'redis'
 gem 'connection_pool', '~> 2.4.1'
@@ -50,7 +49,6 @@ gem 'diffy'
 gem 'paper_trail'
 
 group :production do
-  gem 'aws-sdk-s3'
   gem 'rack-timeout', '~> 0.7'
 end
 
