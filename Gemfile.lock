@@ -95,26 +95,6 @@ GEM
       version_gem (~> 1.1, >= 1.1.13)
     auth-sanitizer (0.2.2)
       version_gem (~> 1.1, >= 1.1.10)
-    aws-eventstream (1.4.1)
-    aws-partitions (1.1300.0)
-    aws-sdk-core (3.263.0)
-      aws-eventstream (~> 1, >= 1.4.1)
-      aws-partitions (~> 1, >= 1.992.0)
-      aws-sigv4 (~> 1.9)
-      base64
-      bigdecimal
-      jmespath (~> 1, >= 1.6.1)
-      logger
-      rexml (~> 3.4, >= 3.4.2)
-    aws-sdk-kms (1.138.0)
-      aws-sdk-core (~> 3, >= 3.263.0)
-      aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.237.0)
-      aws-sdk-core (~> 3, >= 3.263.0)
-      aws-sdk-kms (~> 1)
-      aws-sigv4 (~> 1.5)
-    aws-sigv4 (1.12.1)
-      aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.3.0)
     bcrypt (3.1.22)
     bigdecimal (4.1.3)
@@ -175,7 +155,6 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
-    ffi (1.17.4)
     foreman (0.90.0)
       thor (~> 1.4)
     fugit (1.14.0)
@@ -201,7 +180,6 @@ GEM
       ostruct
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
-    image_processing (2.2.0)
     importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -212,7 +190,6 @@ GEM
       prism (>= 1.3.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    jmespath (1.6.2)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     json (3.1.0)
@@ -470,7 +447,6 @@ DEPENDENCIES
   actionview-encoded_mail_to
   active_model_serializers (~> 0.10.16)
   annotate
-  aws-sdk-s3
   bcrypt (~> 3.1)
   bootsnap (~> 1.26)
   capybara (~> 3.37)
@@ -487,7 +463,6 @@ DEPENDENCIES
   groupdate
   haml-rails
   honeybadger (~> 6.10)
-  image_processing (~> 2.2)
   jsbundling-rails
   launchy
   letter_opener_web
